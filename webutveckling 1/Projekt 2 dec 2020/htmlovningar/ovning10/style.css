@@ -1,0 +1,55 @@
+body 
+{
+    background-color: black;
+}
+
+.menuBar {
+    width: 100%;
+    height: 50px;
+    background-color: grey;
+    /* border-radius: 10% 10% 10% 10%; */
+}
+
+.menuBar ul
+{
+    list-style-type: none;
+    margin-left: 40%;
+    padding: 0;
+    overflow: hidden;
+
+}
+
+.menuBar li
+{
+    float: left;
+
+}
+
+.menuBar li a
+{
+    font-size: 20px;
+    color: white;
+    display: block;
+    padding: 14px 13px;
+    text-align: center;
+    text-decoration: none;
+}
+
+li a:hover 
+{
+    text-decoration: underline;
+    text-decoration-color: black;
+}
+
+.rektangel {
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: green;
+    border-radius: 10% 10% 10% 10%;
+}
+
+a:hover .rektangel {
+    background-color: blue;
+}
