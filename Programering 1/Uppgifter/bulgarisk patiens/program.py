@@ -1,3 +1,5 @@
 
-import card
-import patiens
+from card import *
+from patiens import *
+
+print(generateDeckOfCards())
