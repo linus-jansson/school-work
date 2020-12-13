@@ -67,8 +67,10 @@ void readSensors()
             lastDebounceTime = millis();
         }
 
+        if (digitalRead(SENSOR_PIN) == HIGH)
+            numOfClicks++;
         
-        if ((millis() - beenGreenTimer) > DEBOUNCEDELAY) {
+        if ((millis() - lastDebounceTime) > DEBOUNCEDELAY) {
             // whatever the reading is at, it's been there for longer than the debounce
             // delay, so take it as the actual current state:
 
@@ -79,7 +81,6 @@ void readSensors()
                 // Car is sensed if button is pressed
                 if (buttonState == HIGH && lightstate0 == STATE_LED_GREEN) {
                     carSensed = true;
-                    numOfClicks++;
                 }
 
             }
@@ -187,16 +188,17 @@ void runStateMachine0()
     switch (lightstate0)
     {
         case STATE_LED_GREEN:
-            
             // Om det kommer en bil så ska den byta till gult
             // och så ska den kolla ifall längden som den har varit grönt är större än en viss tid
 
             if (carSensed && ready && digitalRead(SENSOR_PIN) == LOW)
             {
+                Serial.print("Num of cars: ");
+                Serial.println(numOfClicks);
+                
                 ready = false;
                 beenGreenTimer = 0;
            
-                
                 Serial.println("0: Green -> Yellow");
                 lightstate0 = STATE_LED_YELLOW;
 
@@ -262,10 +264,8 @@ void runStateMachine1()
             break;
 
         case STATE_LED_GREEN:
-            Serial.print("Num of cars: ");
-            Serial.println(numOfClicks);
-            // Green LED is turned on longer when the button is pressed during a longer time
-            if (numOfClicks > 2)
+            // Green LED is turned on longer when the button is pressed for a longer time
+            if (numOfClicks > 1000)
                 pause(2000);
             else
                 pause(500);     
