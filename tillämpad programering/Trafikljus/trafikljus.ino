@@ -23,6 +23,7 @@ int lightstate0 = STATE_LED_GREEN;
 int lightstate1 = STATE_LED_RED;
 
 bool carSensed = false;
+int numOfClicks;
 
 // Used for the pause function
 unsigned long previousMillis;
@@ -34,7 +35,6 @@ bool ready = true;
 int buttonState;             // the current reading from the input pin
 int lastButtonState = LOW;   // the previous reading from the input pin
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-
 
 void setup()
 {
@@ -58,7 +58,7 @@ void readSensors()
 
     if (ready == true)
     {
-    // read the state of the switch into a local variable:
+        // read the state of the switch into a local variable:
         int isButtonReading = digitalRead(SENSOR_PIN);
 
         // If the switch changed, due to noise or pressing:
@@ -79,6 +79,7 @@ void readSensors()
                 // Car is sensed if button is pressed
                 if (buttonState == HIGH && lightstate0 == STATE_LED_GREEN) {
                     carSensed = true;
+                    numOfClicks++;
                 }
 
             }
@@ -88,15 +89,13 @@ void readSensors()
         lastButtonState = isButtonReading;   
     }
     // om huvudleden är grön och den inte är ready
-    else if (lightstate0 == STATE_LED_GREEN && ready == false)
+    else if (lightstate0 == STATE_LED_GREEN)
     {
-        beenGreenTimer++;
+        Serial.println("Button cooldown...");
+        pause(2500);
+        ready = true;
+        Serial.println("Button cooldown done!");
 
-        // kan ökas senare beroende på hur snabbat processorn faktiskt lägger till 1 tills den blir 2500
-        if (beenGreenTimer >= 2500)
-        {
-            ready = true;
-        }
     }
      
 }
@@ -192,14 +191,18 @@ void runStateMachine0()
             // Om det kommer en bil så ska den byta till gult
             // och så ska den kolla ifall längden som den har varit grönt är större än en viss tid
 
-            if (carSensed && ready)
+            if (carSensed && ready && digitalRead(SENSOR_PIN) == LOW)
             {
                 ready = false;
                 beenGreenTimer = 0;
+                Serial.print("Num of cars: ");
+                Serial.println(numOfClicks);
+                if (numOfClicks > 2)
+                    pause(2000);
+                else
+                    pause(500);                
                 
-                pause(500);
                 Serial.println("0: Green -> Yellow");
-
                 lightstate0 = STATE_LED_YELLOW;
 
             }
@@ -210,6 +213,7 @@ void runStateMachine0()
             pause(1000);
             Serial.println("0: Yellow -> Red");
             lightstate0 = STATE_LED_RED;
+            
             break;
         
         case STATE_LED_RED:
@@ -220,6 +224,7 @@ void runStateMachine0()
                 pause(1500);
 
                 Serial.println("0: Red -> Yellow");
+                numOfClicks = 0;
                 lightstate0 = STATE_LED_YELLOW2;
             }
 
