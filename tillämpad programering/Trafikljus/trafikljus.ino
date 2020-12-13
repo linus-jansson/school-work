@@ -195,12 +195,7 @@ void runStateMachine0()
             {
                 ready = false;
                 beenGreenTimer = 0;
-                Serial.print("Num of cars: ");
-                Serial.println(numOfClicks);
-                if (numOfClicks > 2)
-                    pause(2000);
-                else
-                    pause(500);                
+           
                 
                 Serial.println("0: Green -> Yellow");
                 lightstate0 = STATE_LED_YELLOW;
@@ -267,7 +262,13 @@ void runStateMachine1()
             break;
 
         case STATE_LED_GREEN:
-            pause(1500);
+            Serial.print("Num of cars: ");
+            Serial.println(numOfClicks);
+            // Green LED is turned on longer when the button is pressed during a longer time
+            if (numOfClicks > 2)
+                pause(2000);
+            else
+                pause(500);     
             Serial.println("1: Green -> Yellow");
             carSensed = false;
             lightstate1 = STATE_LED_YELLOW;
