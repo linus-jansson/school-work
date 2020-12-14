@@ -198,7 +198,8 @@ void runStateMachine0()
                 
                 ready = false;
                 beenGreenTimer = 0;
-           
+
+                pause(1000)
                 Serial.println("0: Green -> Yellow");
                 lightstate0 = STATE_LED_YELLOW;
 
