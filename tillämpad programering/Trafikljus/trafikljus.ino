@@ -28,7 +28,6 @@ int numOfClicks;
 // Used for the pause function
 unsigned long previousMillis;
 
-unsigned long beenGreenTimer;
 bool ready = true;
 
 // Debouncing
@@ -56,6 +55,9 @@ void setup()
 void readSensors()
 {
 
+    if (digitalRead(SENSOR_PIN) == HIGH)
+        numOfClicks++;
+
     if (ready == true)
     {
         // read the state of the switch into a local variable:
@@ -66,9 +68,6 @@ void readSensors()
             // reset the debouncing timer
             lastDebounceTime = millis();
         }
-
-        if (digitalRead(SENSOR_PIN) == HIGH)
-            numOfClicks++;
         
         if ((millis() - lastDebounceTime) > DEBOUNCEDELAY) {
             // whatever the reading is at, it's been there for longer than the debounce
@@ -105,8 +104,8 @@ void readSensors()
 
 void pause(int PAUSETIME)
 {
-    Serial.print("Waiting for: ");
-    Serial.println(PAUSETIME);
+    // Serial.print("Waiting for: ");
+    // Serial.println(PAUSETIME);
 
     while (true)
     {
@@ -193,14 +192,14 @@ void runStateMachine0()
 
             if (carSensed && ready && digitalRead(SENSOR_PIN) == LOW)
             {
-                Serial.print("Num of cars: ");
-                Serial.println(numOfClicks);
+                // Serial.print("Num of cars: ");
+                // Serial.println(numOfClicks);
+                Serial.println("cars waiting on crossing street");
                 
                 ready = false;
-                beenGreenTimer = 0;
 
-                pause(1000)
-                Serial.println("0: Green -> Yellow");
+                pause(1000);
+                // Serial.println("0: Green -> Yellow");
                 lightstate0 = STATE_LED_YELLOW;
 
             }
@@ -209,7 +208,7 @@ void runStateMachine0()
 
         case STATE_LED_YELLOW:
             pause(1000);
-            Serial.println("0: Yellow -> Red");
+            // Serial.println("0: Yellow -> Red");
             lightstate0 = STATE_LED_RED;
             
             break;
@@ -219,9 +218,9 @@ void runStateMachine0()
             // Om det inte kommer en bil / längre och andra rödljuset är rött så ska den byta tillbaka till gult mot grönt
             if (carSensed == false && lightstate1 == STATE_LED_RED)
             {
+                Serial.println("Going back to normal");
                 pause(1500);
-
-                Serial.println("0: Red -> Yellow");
+                // Serial.println("0: Red -> Yellow");
                 numOfClicks = 0;
                 lightstate0 = STATE_LED_YELLOW2;
             }
@@ -230,7 +229,7 @@ void runStateMachine0()
 
         case STATE_LED_YELLOW2:
             pause(1000);
-            Serial.println("0: Yellow -> Green");
+            // Serial.println("0: Yellow -> Green");
             lightstate0 = STATE_LED_GREEN;
             
             break;
@@ -253,31 +252,32 @@ void runStateMachine1()
             if (lightstate0 == STATE_LED_RED && carSensed == true)
             {
                 pause(500);
-                Serial.println("1: Red -> Yellow");
+                // Serial.println("1: Red -> Yellow");
                 lightstate1 = STATE_LED_YELLOW2;
             }
             break;
 
         case STATE_LED_YELLOW2:
             pause(1000);
-            Serial.println("1: Yellow -> Green");
+            // Serial.println("1: Yellow -> Green");
             lightstate1 = STATE_LED_GREEN;
             break;
 
         case STATE_LED_GREEN:
             // Green LED is turned on longer when the button is pressed for a longer time
+            Serial.println("letting cars through...");
             if (numOfClicks > 1000)
                 pause(2000);
             else
                 pause(500);     
-            Serial.println("1: Green -> Yellow");
+            // Serial.println("1: Green -> Yellow");
             carSensed = false;
             lightstate1 = STATE_LED_YELLOW;
             break;
 
         case STATE_LED_YELLOW:
             pause(1000);
-            Serial.println("1: Yellow -> Red");
+            // Serial.println("1: Yellow -> Red");
             lightstate1 = STATE_LED_RED;
             break;
     }  
