@@ -26,7 +26,9 @@ bool carSensed = false;
 int numOfClicks;
 
 // Used for the pause function
-unsigned long previousMillis;
+unsigned long previousMillis0 = 0;
+unsigned long previousMillis1 = 0;
+
 
 bool ready = true;
 
@@ -54,48 +56,45 @@ void setup()
 
 void readSensors()
 {
+    if (numOfClicks >= 1)
+        carSensed = true;
 
-    if (digitalRead(SENSOR_PIN) == HIGH)
-        numOfClicks++;
+    // read the state of the switch into a local variable:
+    int isButtonReading = digitalRead(SENSOR_PIN);
 
-    if (ready == true)
-    {
-        // read the state of the switch into a local variable:
-        int isButtonReading = digitalRead(SENSOR_PIN);
-
-        // If the switch changed, due to noise or pressing:
-        if (isButtonReading != lastButtonState) {
-            // reset the debouncing timer
-            lastDebounceTime = millis();
-        }
-        
-        if ((millis() - lastDebounceTime) > DEBOUNCEDELAY) {
-            // whatever the reading is at, it's been there for longer than the debounce
-            // delay, so take it as the actual current state:
-
-            // if the button state has changed:
-            if (isButtonReading != buttonState) {
-                buttonState = isButtonReading;
-
-                // Car is sensed if button is pressed
-                if (buttonState == HIGH && lightstate0 == STATE_LED_GREEN) {
-                    carSensed = true;
-                }
-
-            }
-        }
-
-        // save the reading. Next time through the loop, it'll be the lastButtonState:
-        lastButtonState = isButtonReading;   
+    // If the switch changed, due to noise or pressing:
+    if (isButtonReading != lastButtonState) {
+        // reset the debouncing timer
+        lastDebounceTime = millis();
     }
-    // om huvudleden är grön och den inte är ready
-    else if (lightstate0 == STATE_LED_GREEN)
+    
+    if ((millis() - lastDebounceTime) > DEBOUNCEDELAY) {
+        // whatever the reading is at, it's been there for longer than the debounce
+        // delay, so take it as the actual current state:
+        // if the button state has changed:
+        if (isButtonReading != buttonState) {
+            buttonState = isButtonReading;
+            
+            // Car is sensed if button is pressed
+            if (buttonState == HIGH) {
+                numOfClicks++;       
+                Serial.print("Num of cars: ");
+                Serial.println(numOfClicks);
+            }
+
+        }
+    }
+
+    // save the reading. Next time through the loop, it'll be the lastButtonState:
+    lastButtonState = isButtonReading;   
+    
+    // Button cooldown
+    if (lightstate0 == STATE_LED_GREEN && ready == false)
     {
         Serial.println("Button cooldown...");
         pause(2500);
         ready = true;
         Serial.println("Button cooldown done!");
-
     }
      
 }
@@ -107,14 +106,14 @@ void pause(int PAUSETIME)
     // Serial.print("Waiting for: ");
     // Serial.println(PAUSETIME);
 
-    while (true)
-    {
-        if ((millis() - previousMillis) >= PAUSETIME) 
-        {
-            previousMillis = millis();
-            break;
-        }
-    }
+    // while (true)
+    // {
+    //     if ((millis() - previousMillis) >= PAUSETIME) 
+    //     {
+    //         previousMillis = millis();
+    //         break;
+    //     }
+    // }
     
 }
 
@@ -189,48 +188,59 @@ void runStateMachine0()
         case STATE_LED_GREEN:
             // Om det kommer en bil så ska den byta till gult
             // och så ska den kolla ifall längden som den har varit grönt är större än en viss tid
-
             if (carSensed && ready && digitalRead(SENSOR_PIN) == LOW)
             {
-                // Serial.print("Num of cars: ");
-                // Serial.println(numOfClicks);
-                Serial.println("cars waiting on crossing street");
-                
-                ready = false;
+                if ((millis() - previousMillis0) >= 2500) 
+                {
+                    previousMillis0 = millis();
+                    
+                    Serial.println("cars waiting on crossing street"); 
+                    ready = false;
+                    // Serial.println("0: Green -> Yellow");
+                    lightstate0 = STATE_LED_YELLOW;
 
-                pause(1000);
-                // Serial.println("0: Green -> Yellow");
-                lightstate0 = STATE_LED_YELLOW;
-
+                }
             }
+
 
             break;
 
         case STATE_LED_YELLOW:
-            pause(1000);
+
+            if ((millis() - previousMillis0) >= 1000) 
+            {
+                previousMillis0 = millis();
+                lightstate0 = STATE_LED_RED;
+            }
             // Serial.println("0: Yellow -> Red");
-            lightstate0 = STATE_LED_RED;
             
             break;
         
         case STATE_LED_RED:
-
-            // Om det inte kommer en bil / längre och andra rödljuset är rött så ska den byta tillbaka till gult mot grönt
-            if (carSensed == false && lightstate1 == STATE_LED_RED)
+            if ((millis() - previousMillis0) >= 1500) 
             {
-                Serial.println("Going back to normal");
-                pause(1500);
-                // Serial.println("0: Red -> Yellow");
-                numOfClicks = 0;
-                lightstate0 = STATE_LED_YELLOW2;
+                previousMillis0 = millis();
+                if (carSensed == false && lightstate1 == STATE_LED_RED)
+                {
+                    Serial.println("Going back to normal");
+                    // Serial.println("0: Red -> Yellow");
+                    lightstate0 = STATE_LED_YELLOW2;
+                }
             }
+            // Om det inte kommer en bil / längre och andra rödljuset är rött så ska den byta tillbaka till gult mot grönt
+
 
             break;
 
         case STATE_LED_YELLOW2:
-            pause(1000);
+
             // Serial.println("0: Yellow -> Green");
-            lightstate0 = STATE_LED_GREEN;
+            
+            if ((millis() - previousMillis0) >= 1000) 
+            {
+                previousMillis0 = millis();
+                lightstate0 = STATE_LED_GREEN;
+            }
             
             break;
     }
@@ -242,43 +252,74 @@ void runStateMachine0()
 
 void runStateMachine1()
 {   
+    int timepause = 1000 * numOfClicks;
 
     switch (lightstate1)
     {
 
         case STATE_LED_RED:
-
-            // kommer det en bil och andra rödljuset är rött så kan den byta mot grönt
-            if (lightstate0 == STATE_LED_RED && carSensed == true)
+            if ((millis() - previousMillis1) >= 1000) 
             {
-                pause(500);
-                // Serial.println("1: Red -> Yellow");
-                lightstate1 = STATE_LED_YELLOW2;
+                previousMillis1 = millis();
+                if (lightstate0 == STATE_LED_RED && carSensed == true)
+                {
+                    // Serial.println("1: Red -> Yellow");
+                    lightstate1 = STATE_LED_YELLOW2;
+                }
             }
+            // kommer det en bil och andra rödljuset är rött så kan den byta mot grönt
+
             break;
 
         case STATE_LED_YELLOW2:
-            pause(1000);
             // Serial.println("1: Yellow -> Green");
-            lightstate1 = STATE_LED_GREEN;
+            if ((millis() - previousMillis1) >= 1000) 
+            {
+                previousMillis1 = millis();
+                lightstate1 = STATE_LED_GREEN;
+                Serial.print("letting cars through for ");
+                if (numOfClicks <= 20) {
+                    Serial.print(timepause);
+                }
+                else {
+                    Serial.print("20000");
+                }
+                Serial.println("ms");
+            }    
             break;
 
         case STATE_LED_GREEN:
             // Green LED is turned on longer when the button is pressed for a longer time
-            Serial.println("letting cars through...");
-            if (numOfClicks > 1000)
-                pause(2000);
-            else
-                pause(500);     
+
+            if (numOfClicks <= 20) {
+                if ((millis() - previousMillis1) >= timepause) 
+                {
+                    previousMillis1 = millis();
+                    numOfClicks = 0;
+                    lightstate1 = STATE_LED_YELLOW;
+                    carSensed = false;
+                }
+            }
+            else {
+                if ((millis() - previousMillis1) >= 20000) 
+                {
+                    previousMillis1 = millis();
+                    numOfClicks = 0;
+                    lightstate1 = STATE_LED_YELLOW;
+                    carSensed = false;
+                }
+            }
+                     
             // Serial.println("1: Green -> Yellow");
-            carSensed = false;
-            lightstate1 = STATE_LED_YELLOW;
             break;
 
         case STATE_LED_YELLOW:
-            pause(1000);
+            if ((millis() - previousMillis1) >= 1000) 
+            {
+                previousMillis1 = millis();
+                lightstate1 = STATE_LED_RED;
+            }
             // Serial.println("1: Yellow -> Red");
-            lightstate1 = STATE_LED_RED;
             break;
     }  
 
