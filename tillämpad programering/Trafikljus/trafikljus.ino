@@ -26,9 +26,7 @@ bool carSensed = false;
 int numOfClicks;
 
 // Used for the pause function
-unsigned long previousMillis0 = 0;
-unsigned long previousMillis1 = 0;
-
+unsigned long previousMillis0, previousMillis1, cooldownTimer;
 
 bool ready = true;
 
@@ -92,7 +90,7 @@ void readSensors()
     if (lightstate0 == STATE_LED_GREEN && ready == false)
     {
         Serial.println("Button cooldown...");
-        pause(2500);
+        cooldown(2500);
         ready = true;
         Serial.println("Button cooldown done!");
     }
@@ -101,19 +99,21 @@ void readSensors()
 
 
 
-void pause(int PAUSETIME)
+void cooldown(int PAUSETIME)
 {
-    // Serial.print("Waiting for: ");
-    // Serial.println(PAUSETIME);
+    Serial.print("Waiting for: ");
+    Serial.println(PAUSETIME);
 
-    // while (true)
-    // {
-    //     if ((millis() - previousMillis) >= PAUSETIME) 
-    //     {
-    //         previousMillis = millis();
-    //         break;
-    //     }
-    // }
+    cooldownTimer = millis();
+
+    while (true)
+    {
+        if ((millis() - cooldownTimer) >= PAUSETIME) 
+        {
+            cooldownTimer = millis();
+            break;
+        }
+    }
     
 }
 
@@ -334,5 +334,4 @@ void loop()
     readSensors();
     runStateMachine0();
     runStateMachine1();
-
 }
