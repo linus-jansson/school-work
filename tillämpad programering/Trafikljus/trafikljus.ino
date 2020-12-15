@@ -272,20 +272,30 @@ void runStateMachine1()
             break;
 
         case STATE_LED_YELLOW2:
-            // Serial.println("1: Yellow -> Green");
-            if ((millis() - previousMillis1) >= 1000) 
+            
+            if (numOfClicks <= 20) 
             {
-                previousMillis1 = millis();
-                lightstate1 = STATE_LED_GREEN;
-                Serial.print("letting cars through for ");
-                if (numOfClicks <= 20) {
+                if ((millis() - previousMillis1) >= timepause)
+                {
+                    previousMillis1 = millis();
+                    lightstate1 = STATE_LED_GREEN;
+                    Serial.print("letting cars through for ");
                     Serial.print(timepause);
+                    Serial.println("ms");
                 }
-                else {
-                    Serial.print("20000");
+            }
+            else 
+            {
+                if ((millis() - previousMillis1) >= 20000)
+                {
+                    previousMillis1 = millis();
+                    lightstate1 = STATE_LED_GREEN;
+                    Serial.print("letting cars through for 20000");
+                    Serial.println("ms");
                 }
-                Serial.println("ms");
-            }    
+            }
+            // Serial.println("1: Yellow -> Green");
+               
             break;
 
         case STATE_LED_GREEN:
