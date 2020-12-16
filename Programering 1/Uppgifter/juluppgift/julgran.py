@@ -15,7 +15,7 @@ tree = []
 
 for x in range(1, length, 2):
     innehall = '*'
-    if x == 1:
+    if x == 1: 
         innehall = 'o'
         color = Fore.YELLOW
     else:
@@ -23,7 +23,7 @@ for x in range(1, length, 2):
         color = Fore.GREEN
         
     space = ' ' * ((length - x) // 2)
-    out = space + color +(innehall * x) + space
+    out = space + color + (innehall * x) + space
     tree.append(out)
 
 for n in tree:
