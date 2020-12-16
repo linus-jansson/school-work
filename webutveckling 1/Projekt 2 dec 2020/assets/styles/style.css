@@ -105,7 +105,7 @@ hr
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    z-index: 3;
+    z-index: 4;
     display: none;
     position: absolute;
     background-color: rgb(12, 17, 22);
@@ -192,8 +192,8 @@ hr
 #particles-js
 {
     z-index: -1;
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
     position: absolute;
     
     background-image: url("");
