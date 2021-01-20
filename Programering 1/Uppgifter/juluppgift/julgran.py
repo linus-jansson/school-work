@@ -15,6 +15,7 @@ tree = []
 
 for x in range(1, length, 2):
     innehall = '*'
+    
     if x == 1: 
         innehall = 'o'
         color = Fore.YELLOW
