@@ -201,3 +201,11 @@ hr
     background-size: cover;
     background-position: 50% 50%;  
 }
+
+.discord-iframe
+{
+    width: 350px;
+    height: 500px;
+    border: 0;
+    
+}
