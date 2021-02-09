@@ -42,14 +42,29 @@ def print_covid_data(storsta_smitta):
             
         print(f"{item[1]}\t {item[3]}")    
 
-def visa_smitt_graf(smitt_lista):
-    names = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov"]
-    for n in smitt_lista:
-        plt.plot(names, n)
+def visa_smitt_graf(smitt_lista = []): # Används för att visa hur smittan utvecklts på en graf
+    names = ["Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov"]
+    for n in range(2, len(smitt_lista) - 1):
+        print(smitt_lista[n])
+
+    for n in smitt_lista: # plottar smittan per varje region
+        
+        print(n, len(n))
+        plt.plot(names, n, label="smitt_lista[smitt_lista.index(n)][0]")
+
+    if len(smitt_lista) > 1:
+        plt.suptitle("Smitta per månad och 100 000 inv.")
+    else: # om listan är tom har något gott fel och detta ska meddelas
+        plt.suptitle("Smitta per månad och 100 000 inv. Ett fel har inträffat.") 
+
     plt.xlabel("2020")
-    plt.ylabel("Smitta per månad och 100 000 invånare")
+    plt.ylabel("Smitta per månad och 100 000 inv.")
+    plt.legend()
     plt.show()
 
+
+
+plot_regioner = ["Hela_riket", "Norrbotten", "Dalarna", "Stockholm", "Gotland", "Vastra_gotaland", "Skane"]
 covid_data = load_file_content_into_array("covid-19_data.csv")
 antal_invanare = load_file_content_into_array("antal_invanare.csv")
 antal_testade = load_file_content_into_array("antal_testade.csv")
@@ -61,7 +76,32 @@ while True:
         print_covid_data( storst_smitta_per_region(covid_data, antal_invanare) )
         break
     elif alternativ == "2":
-        visa_smitt_graf( [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]])
+        graf_att_printa = [] # 8=====B
+        for region in range(1, len(covid_data[0]) - 1):
+
+            if covid_data[0][region] in plot_regioner: # den behöver bara köra på regionerna som ska plottas
+                smitta_per_manad = 0
+                nuvarande_region = covid_data[0][region]
+                enskild_region = [0]
+                
+                for x in range(1, len(covid_data) - 1):
+                    month = int(covid_data[x][0][5:7])
+                    # kolla ifall månaden är samma som förra; är den det så ska den addera förra med den som är nu
+                    # Kan orsaka fel: på första x - 1 så kommer den att hämta "Statistikdatum" vilket inte går att göra om till en int
+                    try:
+                        if month == int(covid_data[x - 1][0][5:7]):
+                            if int(covid_data[x][region]) != int(covid_data[x - 1][region]):
+                                smitta_per_manad += int(covid_data[x][region])
+                        else:
+                            enskild_region.append(smitta_per_manad)
+                    except ValueError:
+                        continue
+                print(nuvarande_region, enskild_region, len(enskild_region))
+                    
+                graf_att_printa.append(enskild_region)
+
+        # visa_smitt_graf()
+        visa_smitt_graf( graf_att_printa)
         break
     else:
         break
