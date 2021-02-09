@@ -1,55 +1,47 @@
 import csv
 import matplotlib as plt
 
-antal_testade = []
-
-def get_covid_data():
-    with open('covid-19_data.csv', newline='') as data:
-        covid_data = csv.reader(data, delimiter=';') # Delar upp datat
-        lista = []
-        for row in covid_data:
-            # print(row)
-            lista.append(row) # lägger till en array i arrayen över covid data
-        return lista
-
-def get_number_of_population():
-    with open('antal_invanare.csv', newline='') as data:
-        antal_invanare = csv.reader(data, delimiter=';') # Delar upp datat
-        lista = []
-        for row in antal_invanare:
-            # print(row)
-            lista.append(row) # lägger till en array i arrayen över covid data
-        return lista
-
-def get_number_of_tested():
-    with open('antal_testade.csv', newline='') as data:
+def load_file_content_into_array(filename):
+    with open(filename, newline='') as data:
         antal_testade = csv.reader(data, delimiter=';') # Delar upp datat
         lista = []
         for row in antal_testade:
-            # print(row)
             lista.append(row) # lägger till en array i arrayen över covid data
         return lista
-        
-# [0][x] beskriver namnen på de olika talen i listan tex [0][2] Skulle returnera blekinge
-# [1][x] och neråt är faktiska datat
-covid_data = get_covid_data()
-antal_invanare = get_number_of_population()
-antal_testade = get_number_of_tested()
 
-# print(antal_invanare[0][2])
+# TODO: ifall en region har ett högsta smittotal flera gånger ska den sparas ändå
+def storst_smitta_per_region(covid_data, antal_invanare):
+    # covid_data[0][x] beskriver namnen på de olika talen i listan tex [0][2] Skulle returnera blekinge
+    # covid_data[1][x] och neråt är faktiska datat
+    storsta_smitta = [] # används för att hålla koll på smittan i olika regioner senare
+    for region in range(1, len(covid_data[0])): # Hittar största smittan för varje region
+        storsta = 0
+        datum = ""
+        for x in range(1, len(covid_data) - 1): # hittar det största smittantalet som regionen har haft
+            if int(covid_data[x][region]) >= storsta: # Kollar värdet med största och jämför vilken som är störst
+                storsta = int(covid_data[x][region]) # sätt största värdet till nuvarande värdet
+                datum = covid_data[x][0] # hämtar datumet som smittan var störst
+                hundrak = storsta // (int(antal_invanare[1][region]) / 100000) # räknar ut smnittan per 100k invånare
+                # print(f"{storsta} // ({int(antal_invanare[1][region])} / {100000}) = {hundrak}" )
+        storsta_smitta.append([covid_data[0][region], datum, storsta, hundrak])
+    return storsta_smitta
 
-# for dag in range(2, len(covid_data) - 1):
-#     # date = dag[0] # The date
-#     # total = dag[1] # total amount
-#     for count, value in enumerate(covid_data[dag]):
-#         print(f"{value}", end=" ")    
-#     print()
-storsta = 0
-print(covid_data[0][2])
-for x in range(2, len(covid_data) - 1):
-    if int(covid_data[x][2]) > int(covid_data[x - 1][2]):
-        print(f"{covid_data[x][2]} > {covid_data[x - 1][2]}")
-        storsta = covid_data[x][2]
-    
-print(storsta)
+def print_covid_data(storsta_smitta):
+    print(f"Region/Riket\t\tDatum\t\t Antal smittade per 100 000 inv.")
+    print("-"*75)
+    for item in storsta_smitta:
+        if len(item[0]) <= 7:
+            print(f"{item[0]}\t\t\t", end="")
+        elif len(item[0]) >= 16:
+            print(f"{item[0]}\t", end="")
+        else:
+            print(f"{item[0]}\t\t", end="")
+            
+        print(f"{item[1]}\t {item[3]}")    
+
+covid_data = load_file_content_into_array("covid-19_data.csv")
+antal_invanare = load_file_content_into_array("antal_invanare.csv")
+antal_testade = load_file_content_into_array("antal_testade.csv")
+
+print_covid_data( storst_smitta_per_region(covid_data, antal_invanare) )
     
