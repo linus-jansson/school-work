@@ -70,6 +70,7 @@ def visa_graf(smitt_lista, title, ytitle): # Används för att visa hur smittan 
         plt.suptitle(title)
     else: 
         plt.suptitle(f"{title} Ett fel har inträffat.") 
+
     # Allmäna graf inställningar    
     plt.grid(color='grey', linestyle='-', linewidth=0.25)
     plt.xlabel("2020")
@@ -85,7 +86,7 @@ def smitta_per_manad_per_region():
         if covid_data[0][region] in graf_regioner: # den behöver bara köra på regionerna som finns med i graf_regioner listan
             smitta_per_manad = 0
             nuvarande_region = covid_data[0][region] # hämtar namnet på den nuvarande regionen som loopen är på
-            enskild_region = [nuvarande_region, 0]
+            smitta_enskild_region = [nuvarande_region, 0]
             
             for x in range(1, len(covid_data)):                
                 try: # Testar ifall det är ett nummer om det inte är det så betyder det att det är första 
@@ -96,12 +97,12 @@ def smitta_per_manad_per_region():
                         if int(covid_data[x][region]) != int(covid_data[x - 1][region]): # om antalet inte har ändrats så ska den inte lägga till smittan
                             smitta_per_manad += int(covid_data[x][region]) # addera dagens smitta med totalen
                     else:
-                        enskild_region.append(antal_per_hundatusen(smitta_per_manad, hamta_antal_invanare(nuvarande_region, antal_invanare)) ) # är månaden slut så ska den lägga till måndens antal för regionen över 100 000 invånare
+                        smitta_enskild_region.append(antal_per_hundatusen(smitta_per_manad, hamta_antal_invanare(nuvarande_region, antal_invanare)) ) # är månaden slut så ska den lägga till måndens antal för regionen över 100 000 invånare
                         smitta_per_manad = 0 # Ny månad, nytt antal smittade
                 except ValueError:
                     continue
                 
-            graf_data.append(enskild_region)
+            graf_data.append(smitta_enskild_region)
     return graf_data
 
 def smittstyrka(covid_data, antal_testade, antal_invanare):
@@ -127,6 +128,7 @@ def smittstyrka(covid_data, antal_testade, antal_invanare):
 
     smittstyrka_per_manad = ["Antal smittade per testade", 0]
     
+    # Räknar ut den faktiska smittstyrkan
     for month in range(len(antal_smittade_per_manad)):
         
         testade_per_hundratusen = antal_per_hundatusen(int(antal_testade[1][month]), landets_invanare)
