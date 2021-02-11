@@ -78,67 +78,62 @@ def visa_graf(smitt_lista, title, ytitle): # Används för att visa hur smittan 
     plt.legend() # Visar vilken linje som betyder vad
     plt.show() # Visa grafen
 
+def smitta_per_manad(covid_data, region):
+    smitta_per_manad = 0
+    nuvarande_region = covid_data[0][region] # hämtar namnet på den nuvarande regionen som loopen är på
+    output_smitt_antal = [nuvarande_region]
+
+    for dag in range(1, len(covid_data)):                
+        try: # Testar ifall det är ett nummer om det inte är det så betyder det att det är första 
+            month = int(covid_data[dag][0][5:7])
+            last_month = int(covid_data[dag - 1][0][5:7])
+            
+            if month == last_month: # kollar ifall månaden är samma som förra
+                if int(covid_data[dag][region]) != int(covid_data[dag - 1][region]): # om antalet inte har ändrats så ska den inte lägga till smittan
+                    smitta_per_manad += int(covid_data[dag][region]) # addera dagens smitta med totalen
+            else:
+                output_smitt_antal.append(antal_per_hundatusen(smitta_per_manad, hamta_antal_invanare(nuvarande_region, antal_invanare)) ) # är månaden slut så ska den lägga till måndens antal för regionen över 100 000 invånare
+                smitta_per_manad = 0 # Ny månad, nytt antal smittade
+        except ValueError:
+            output_smitt_antal.append(0)
+            continue
+
+    return output_smitt_antal
+
+
 def smitta_per_manad_per_region():
     graf_regioner = ["Hela_riket", "Norrbotten", "Dalarna", "Stockholm", "Gotland", "Vastra_gotaland", "Skane"] # Lista på regioner som den ska hämta datat ifrån
     graf_data = []
     for region in range(1, len(covid_data[0])):
-
+        
         if covid_data[0][region] in graf_regioner: # den behöver bara köra på regionerna som finns med i graf_regioner listan
-            smitta_per_manad = 0
-            nuvarande_region = covid_data[0][region] # hämtar namnet på den nuvarande regionen som loopen är på
-            smitta_enskild_region = [nuvarande_region, 0]
-            
-            for x in range(1, len(covid_data)):                
-                try: # Testar ifall det är ett nummer om det inte är det så betyder det att det är första 
-                    month = int(covid_data[x][0][5:7])
-                    last_month = int(covid_data[x - 1][0][5:7])
-                    
-                    if month == last_month: # kollar ifall månaden är samma som förra
-                        if int(covid_data[x][region]) != int(covid_data[x - 1][region]): # om antalet inte har ändrats så ska den inte lägga till smittan
-                            smitta_per_manad += int(covid_data[x][region]) # addera dagens smitta med totalen
-                    else:
-                        smitta_enskild_region.append(antal_per_hundatusen(smitta_per_manad, hamta_antal_invanare(nuvarande_region, antal_invanare)) ) # är månaden slut så ska den lägga till måndens antal för regionen över 100 000 invånare
-                        smitta_per_manad = 0 # Ny månad, nytt antal smittade
-                except ValueError:
-                    continue
-                
-            graf_data.append(smitta_enskild_region)
+            smitta = smitta_per_manad(covid_data, region)
+            graf_data.append(smitta)
+    
+    print(graf_data)
+
     return graf_data
 
 def smittstyrka(covid_data, antal_testade, antal_invanare):
-    antal_smittade_per_manad = []
-    smitta_per_manad = 0
     landets_invanare = hamta_antal_invanare("Hela_riket", antal_invanare)
-    for dag in range(1, len(covid_data)):
-        month = int(covid_data[dag][0][5:7])
-        
-        try: # Testar ifall det är ett nummer om det inte är det så betyder det att det är första 
-            dagens_smitta = int(covid_data[dag][1])
-            last_month = int(covid_data[dag - 1][0][5:7])
+    # byt om till smitta_per_manad()
 
-            if month == last_month: # kollar ifall månaden är samma som förra
-                if int(covid_data[dag][1]) != int(covid_data[dag - 1][1]): # om antalet inte har ändrats så ska den inte lägga till smittan
-                    smitta_per_manad += dagens_smitta # addera dagens smitta med totalen
-            else:
-                antal_smittade_per_manad.append(antal_per_hundatusen(smitta_per_manad, landets_invanare)) # är månaden slut så ska den lägga till måndens antal för regionen över 100 000 invånare
-                smitta_per_manad = 0 # Ny månad, nytt antal smittade
+    smitta = smitta_per_manad(covid_data, 1) # 1 står för indexet för hela_riket
+    print(smitta, len(smitta), sep=" - ")
 
-        except ValueError:
-            continue
-
-    smittstyrka_per_manad = ["Antal smittade per testade", 0]
-    
+    smittstyrka_per_manad = ["Antal smittade per testade"]
     # Räknar ut den faktiska smittstyrkan
-    for month in range(len(antal_smittade_per_manad)):
+    for month in range(len(smitta) - 1):
         
         testade_per_hundratusen = antal_per_hundatusen(int(antal_testade[1][month]), landets_invanare)
-        smittade_per_hundatusen = antal_smittade_per_manad[month]
+        smittade_per_hundatusen = smitta[month]
         
         if testade_per_hundratusen > 0:
             smittstyrka_per_manad.append(round(smittade_per_hundatusen / testade_per_hundratusen, 3))
         else:
             smittstyrka_per_manad.append(0)
-
+    
+        print(smittstyrka_per_manad, len(smittstyrka_per_manad), sep=" - ")    
     return smittstyrka_per_manad
 
 
@@ -150,16 +145,16 @@ alternativ = input("Välj mellan följande alternativ\n====\nTabell datumet som 
 
 # Huvud loopen
 while True:
-    smitta_data = smitta_per_manad_per_region()
-    styrk_data = smittstyrka(covid_data, antal_testade, antal_invanare)
 
     if alternativ == "1":
         print_covid_data( storst_smitta_per_region(covid_data, antal_invanare) )
         break
     elif alternativ == "2":
+        smitta_data = smitta_per_manad_per_region()
         visa_graf(smitta_data, "Antal smittade per månad och 100.000 inv.", "Antal per månad och 100.000 inv." )
         break
     elif alternativ == "3":
+        styrk_data = smittstyrka(covid_data, antal_testade, antal_invanare)
         visa_graf(styrk_data, "Antal smittade per testade per 100.000 inv.", "Antal smitade per testade")
         break        
     else:
