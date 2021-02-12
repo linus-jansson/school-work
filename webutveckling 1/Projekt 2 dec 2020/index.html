@@ -8,8 +8,11 @@
     <!-- Links -->
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/styles/style.css">
-
+    <link rel="stylesheet" href="assets/styles/lightbox.min.css">
     
+    <link rel="stylesheet" href="assets/styles/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/styles/owl.theme.default.min.css">
+
 </head>
 
 <body>
@@ -66,10 +69,14 @@
                         </div>
                     </li>
 
-                    <li><a href="https://docs.google.com/document/d/1ztJFZNwjs8ivnVwbKpaM63bsEJjdvxiydB9HqAsfa_w/edit?usp=sharing" target="_blank">Historien av internet</a></li>
-                    <li><a href="https://docs.google.com/document/d/1fqJnrIIUCbQSIY6xe70HHlsXY6n97eK_MexplPgeBlE/edit?usp=sharing" target="_blank">GDPR och Upphovsrättslagen</a></li>
-
-                    
+                    <li class="dropdown">
+                        <a class="dropbtn">Skriftliga övningar</a>
+                        <div class="dropdown-content">
+                            <a href="https://docs.google.com/document/d/1ztJFZNwjs8ivnVwbKpaM63bsEJjdvxiydB9HqAsfa_w/edit?usp=sharing" target="_blank">Historien av internet</a>
+                            <a href="https://docs.google.com/document/d/1fqJnrIIUCbQSIY6xe70HHlsXY6n97eK_MexplPgeBlE/edit?usp=sharing" target="_blank">GDPR och Upphovsrättslagen</a>
+                        </div>
+                    </li>
+                  
                 </ul>
             </nav>
 
@@ -93,11 +100,40 @@
     
                     <div class="center">
                         <h3>Här är min snapkod också</h3>
-                        <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250">                
+                        <a href="assets/img/snapchat.svg" data-lightbox="image-1" data-title="Min snapkod">
+                            <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250">
+                        </a>
                     </div>
+
                 </div>  
 
+
+  
+
             </div>
+                <!-- Set up your HTML -->
+                <div class="owl-carousel" style="margin-top: 50px;">
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/oscarsnap.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/oscarsnap.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/oscarsnap.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                    <div> <img src="assets/img/snapchat.svg" alt="Linus snapkod" height="250" width="250"> </div>
+                </div>
 
             <div id="footer">
                 <hr>
@@ -107,10 +143,26 @@
         </div>
         
     </main>
+    
+    <script src="assets/scripts/jquery-3.5.1-min.js"></script>
+    <script src="assets/scripts/lightbox.min.js"></script>
+
+    <script src="assets/scripts/owl.carousel.min.js"></script>
+
+    <script>
+        lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': false,
+        'disableScrolling': true,
+        'maxWidth': 300,
+        'maxHeight': 300
+        })
+    </script>
 
     <script src="assets/scripts/particles.min.js"></script> 
     <!-- Sätter det nuvarande året i footern på koden så slipper man ändra det sen när det blir årskifte -->
     <script> document.getElementById("currentYear").innerHTML = new Date().getFullYear(); </script> 
+    <script> $(document).ready(function(){ $(".owl-carousel").owlCarousel(); }); </script>
     
 </body>
 
