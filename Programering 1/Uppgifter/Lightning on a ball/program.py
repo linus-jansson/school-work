@@ -20,20 +20,22 @@ yn = float(input("Bestäm y0 > ")) # y0
 
 zn = ( r**2 - xn**2 - yn**2 )**(1/2) # z0
 
-print(zn)
+print(f"z0 = {zn}")
 
 pk = 1 # proportionalitetskonstanten
 
 x = 0
 y = 0
 
-# if negative:
-#     b = 0
-
-z = ( r**2 - x**2 - y**2 )**(1/2)
+# Tänk på att även ̈här kontrollera rotuttrycket. 
+# Blir resultatet negativt under rotuttrycket, ligger punkten utanför klotets yta (låt b=0 där).
+# for x,y in range(-r, r):
+#     if z == negative:
+#       b = 0
+#     z = ( r**2 - x**2 - y**2 )**(1/2)
  
 
-b = (x * xn + yn + z + zn) / (r*r)
+# b = (x * xn + yn + z + zn) / (r*r)
 
 def calculate_sphere():
     pass
