@@ -44,6 +44,7 @@ def display(temps, klockslag):
 
         print()
 
+# Hittar den varmaste dagen av lista av temperaturer
 def warmest_day(temps):
     mean = []
     for n in range(len(temps)):
@@ -51,9 +52,11 @@ def warmest_day(temps):
         for x in temps[n]:
             m += x
         # lägger till dagens temperaturer som medelvärde och rundar av den i listan av medlvärden
-        mean.append( round((m / len(temps[n])), 3) ) 
+        mean.append( round((m / len(temps[n])), 3) )
     # returnerar en lista med vilken dag som den högsta temperaturen va på 
-    return [mean.index(max(mean)), max(mean)]
+    dag = mean.index(max(mean)) + 1 # Adderar 1 annars kommer den att returnera index och inte vilken dag (get_day tar hand om index)
+    value = max(mean)
+    return [dag, value]
 
 # Hämtar temperaturerna från en specefik dag
 def get_day(temps, dag):
@@ -62,11 +65,59 @@ def get_day(temps, dag):
     else:
         return None
 
-# Kör funktionen display som med genererade temperaturer
+# Skriver ut den varmaste dagen
+def display_warmest(tider, temps):
+
+    warmest = warmest_day(temps)
+    
+    print()
+    print(f"Den varmaste dagen va dag {warmest[0]}, medelvärdet {warmest[1]}")
+
+    print("Kl", end="\t")
+    for t in tider:
+        print(f"{t}\t", end="")
+    print()
+
+    
+    for c in get_day(temps, warmest[0]):
+        print(f"\t{c}C", end="")
+
+# Hittar mittenvärdet på en lista
+def find_middle(input_list):
+    middle = float(len(input_list)) / 2 # hittar mitten index på listan
+
+    if middle % 2 != 0: # kollar ifall listan är udda eller inte
+        return input_list[int(middle - .5)]
+    else:
+        return (input_list[int(middle)], input_list[(int(middle - 1))])
+
+# returnerar medianen på listan av temperaturer
+def get_median_temp(temps):
+    print()
+    tmp = []
+    for day in temps:
+        for temp in day:
+            tmp.append(temp)
+
+    tmp.sort()
+    median = find_middle(tmp)
+    x = 0
+    if len(median) > 1: # om listan är udda så ska den hitta medelvärdet på de två medianerna och returnera det som median
+        for n in median:
+            x += n
+        return x / len(median)
+    else:
+        return median
+
+
+def display_median(median):
+    print(f"Median temperaturen: {median}")
+
+
+# Genererar en lista med temperaturer
 t = generate(D,A,B, tider)
-print(t)
+
+# Kör display funktionerna
 display(t, tider)
-
-# print(get_day(t, 1))
-
-print(warmest_day(t))
+display_median(get_median_temp(t))
+display_warmest(tider, t)
