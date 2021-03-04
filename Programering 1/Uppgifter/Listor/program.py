@@ -3,8 +3,9 @@
 # Funktioner; Uppgift 1
 # Datum = 03/03/2021
 # Skriver ut slumpgenererade temperaturer i form av en tabell med olika klockslag över ett vist antal dagar
+# Skriver även ut temperaturenas största värde på en dag och mediantemperaturen
 ###############################################
-import random as r
+import random
 
 D = int(input("Hur många dagar ska vi genera temperaturer? > "))
 A = float(input("Ge en minigräns > "))
@@ -20,7 +21,7 @@ def generate(D, A, B, klockslag):
     for i in range(D):
         dag = []
         for n in range(len(klockslag)):
-            dag.append(r.randint(A*10, B*10) / 10)
+            dag.append(random.randint(A*10, B*10) / 10)
 
         temperatures.append(dag)
     return temperatures
