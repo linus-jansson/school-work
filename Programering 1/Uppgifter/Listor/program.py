@@ -1,6 +1,6 @@
 ###############################################
 # Författare: Linus Jansson 2F
-# Funktioner; Uppgift 1
+# Funktioner och listor; Uppgift 1
 # Datum = 03/03/2021
 # Skriver ut slumpgenererade temperaturer i form av en tabell med olika klockslag över ett vist antal dagar
 # Skriver även ut temperaturenas största värde på en dag och mediantemperaturen
