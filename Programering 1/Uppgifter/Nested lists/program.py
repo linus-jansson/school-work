@@ -53,16 +53,24 @@ uppgift = input("Vilken uppgift vill du köra? (1, 2, 3, 4) > ")
 while True:
     if uppgift == "1":
         resultat = [heltal(1, 5), primtal(5)]
-        print(resultat)
+        for lista in resultat:
+            print(lista)
         break
     elif uppgift == "2":
         resultat = [kvadraten(heltal(1, 5)), kvadraten(primtal(5))]
-        print(resultat)
+        for lista in resultat:
+            print(lista)
         break
     elif uppgift == "3":
-        print(multiTabell(1,10))
+        tabell = multiTabell(1,10)
+        for n in tabell:
+            for i in n:
+                print(f"{i}\t", end="")
+            print("\n")
+                
         break
     elif uppgift == "4":
         resultat = [heltal(1, 100), primtal(100)]
-        print(resultat)
+        for lista in resultat:
+            print(lista)
         break
