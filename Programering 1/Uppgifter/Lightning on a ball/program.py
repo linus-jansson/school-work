@@ -12,13 +12,15 @@
 # x0 & y0 : positionen på ljuskällan
 ###############################################
 
+# Byt till denna http://pyglet.org/ för att skapa spheres
+
 import math
 
-r = float(input("Bestäm en radie på klotet > "))
+r = int(input("Bestäm en radie på klotet > "))
 xn = float(input("Bestäm x0 > ")) # x0
 yn = float(input("Bestäm y0 > ")) # y0
 
-zn = ( r**2 - xn**2 - yn**2 )**(1/2) # z0
+zn = ( r**2 - xn**2 - yn**2 )**0.5 # z0
 
 print(f"z0 = {zn}")
 
@@ -29,13 +31,13 @@ y = 0
 
 # Tänk på att även ̈här kontrollera rotuttrycket. 
 # Blir resultatet negativt under rotuttrycket, ligger punkten utanför klotets yta (låt b=0 där).
-# for x,y in range(-r, r):
-#     if z == negative:
-#       b = 0
-#     z = ( r**2 - x**2 - y**2 )**(1/2)
- 
-
-# b = (x * xn + yn + z + zn) / (r*r)
+for x in range(-r, r):
+    for y in range(x, r):
+        if (r**2 - x**2 - y**2) < 0:
+            b = 0
+        else:
+            b = ( r**2 - x**2 - y**2 )/ r**2
+        print(b, x, y)
 
 def calculate_sphere():
     pass
