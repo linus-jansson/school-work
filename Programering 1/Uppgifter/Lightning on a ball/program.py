@@ -12,8 +12,8 @@
 # x0 & y0 : positionen på ljuskällan
 ###############################################
 
-# Byt till denna http://pyglet.org/ för att skapa spheres
-
+# Byt till denna http://xpyglet.org/ för att skapa spheres
+# RGB(255*b, 255*b, 255*b) --> greyscale gradient
 import math
 
 r = int(input("Bestäm en radie på klotet > "))
