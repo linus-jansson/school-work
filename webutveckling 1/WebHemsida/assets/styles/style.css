@@ -1,0 +1,214 @@
+/* Color scheme: 
+    - https://colorhunt.co/palette/181367 
+    - https://www.color-hex.com/color-palette/55334
+*/
+
+:root {
+    --background: rgb(12, 18, 24);
+    --main: rgb(21, 30, 39);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background);
+    padding: 10px;
+}
+
+h1, h2, h3, p, a, span {
+    color: white;
+}
+
+h1, h2, h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+p, a {
+    /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px; 
+
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: tomato;
+    transition: 0.3s ease;
+
+}
+
+hr
+{
+    border: 1px solid #0c12187e;
+    width: 75%;
+}
+
+.center
+{
+    text-align: center;
+}
+
+
+.navbar 
+{   
+    background-color:  var(--main);
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    border-radius: 17px;
+
+    box-shadow: -5px 7px 38px -8px rgba(0,0,0,0.55);
+    -webkit-box-shadow: -5px 7px 38px -8px rgba(0,0,0,0.55);
+    -moz-box-shadow: -5px 7px 38px -8px rgba(0,0,0,0.55);
+}
+
+#navTitle
+{
+    padding: 25px;
+    margin: 0;
+    font-size: 35px; 
+    margin-right: auto;
+}
+
+#navLinks
+{
+    text-align: right;
+}
+
+#navLinks ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navLinks ul > li
+{
+    display: inline;
+    display: inline-block;
+    padding: 20px;
+}
+
+#navLinks li a
+{
+    display: block;
+    text-align: center;
+}
+
+
+/* Dropdown Button */
+.dropbtn {
+    padding: 16px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    z-index: 4;
+    display: none;
+    position: absolute;
+    background-color: rgb(12, 17, 22);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    padding: 12px 16px;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color:rgb(5, 8, 10);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    transition: 0.3s ease;
+
+    display: block; 
+    cursor: pointer;
+}
+
+.content
+{
+    z-index: 3;
+    position: relative;
+    margin-top: 20px;
+    width: 50%;
+    border: 0px solid #000000;
+    border-radius: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+    background-color: var(--main);
+    
+    /* BOX SHADOW*/
+    box-shadow: -5px 7px 38px -8px rgba(0,0,0,0.55);
+    -webkit-box-shadow: -5px 7px 38px -8px rgba(0,0,0,0.55);
+    -moz-box-shadow: -5px 7px 38px -8px rgba(0,0,0,0.55);
+}
+
+#main-content
+{
+    margin-top: 5px;
+    display: flex; 
+}
+
+#sidebar
+{
+    padding-left: 10px;
+    margin-top: 5px;
+    width: 50%;
+}
+
+#footer
+{   
+    padding-top: 50px;
+    clear: both;
+    text-align: center;
+}
+
+#active 
+{
+    font-weight: bold;
+}
+
+#header
+{
+    font-size: 45px; 
+}
+
+#about
+{
+  font-size: large;  
+}
+
+
+/* Partiklarna i bakgrunden */
+#particles-js
+{
+    z-index: -1;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;  
+}
+
+.discord-iframe
+{
+    width: 350px;
+    height: 500px;
+    border: 0;
+}

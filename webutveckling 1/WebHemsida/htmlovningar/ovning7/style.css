@@ -1,0 +1,43 @@
+
+
+p {
+    font-family: Verdana;
+    font-size: 15px;
+    width: 500px;
+}
+
+#active {
+  font-weight: bold;
+}
+
+.textcenter{
+    text-align: center;
+}
+
+/* Bestämmer utsendet på "menyn" */
+
+.menu li {
+    display: inline;
+}
+
+.menu a {
+
+    text-decoration: none;
+    font-family: Verdana;
+    font-size: 30px;
+    color: seagreen;
+    margin-right: 25px;  
+
+}
+
+.menu a:hover {
+
+    text-decoration: underline;
+
+}
+
+.menu a:active {
+
+    text-decoration: underline;
+
+}
