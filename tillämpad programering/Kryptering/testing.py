@@ -19,18 +19,31 @@
 
 # print(2%10)
 # print(encrypted)
-import math
-def transpose(txt, cols):
-    # arr = [[""]* cols] * 3
-    arr = [[] for n in range(cols)] for m in range(3)
-    
-    # math.ceil(len(txt) / columoner)
 
-    # För varje karaktär, fyll ut listan
+import math
+
+def flipMatrix(txt):
+
+
+def transposeChipher(text, cipher):
+    pass
+
+# Har argumenten "inmatade strängen" och en boolean ifall den ska kryptera eller dekryptera 
+def transpose(txt, cipher): 
+    # arr = [[""]* cols] * 3
+    rows = 3
+    cols = math.ceil(len(txt) / rows) # Anpassar antalet kolumner 
+
+    arr = [["" for n in range(cols)] for m in range(rows)]
+    outArr = [["" for n in range(rows)] for m in range(cols)] # Skapar en array/lista som är omvänd jämfört med orginella listan
+
+    outTxt = ""    
+
     currentChar = 0
     rCount = 0
     cCount = 0
 
+    # För varje karaktär, fyll ut listan
     while currentChar <= len(txt) - 1:
         # Om raden är slut gå till nästa rad kolumn 0
         if len(arr[0]) - 1 < cCount:
@@ -38,37 +51,34 @@ def transpose(txt, cols):
             cCount = 0
         
         arr[rCount][cCount] = txt[currentChar]
-        print(arr, arr[rCount][cCount], txt[currentChar])
         cCount += 1
         currentChar += 1
-    
-    # print(txt)
-    # arr[0][1] = txt[4].upper()
-    # print(len(arr[0]*len(arr)))
-    # print(arr[0])
-    
+        # print(arr, arr[rCount][cCount], txt[currentChar])    
     print(arr)
-    # Skapar en array/lista som är omvänd jämfört med orginella listan
-    outArr = [["A"] * 3] * cols
-    # print(outArr)
-    outTxt = ""
 
-    # För varje rad
-    for r in range(len(arr)):
-        # Varje kolumn
-        for c in range(len(arr[0])):
-            # Byt platsen på Kolumnen och raden från arry till outArr
-            outArr[c][r] = arr[r][c]
-    
+    if cipher:
+        # För varje rad
+        for r in range(len(arr)):
+            # Varje kolumn
+            for c in range(len(arr[0])):
+                # Byt platsen på Kolumnen och raden från arry till outArr
+                outArr[c][r] = arr[r][c]
+    else:
+        for r in range(len(arr)):
+            # Varje kolumn
+            for c in range(len(arr[0])):
+                # Byt platsen på Kolumnen och raden från arry till outArr
+                outArr[c][r] = arr[r][c]
+
     # För varje bokstav i matrisen så ska den lägga till det i outTxt
-    # for idx in range(len(outArr)):
-    #     for val in outArr[idx]:
-    #         outTxt += val
+    for idx in range(len(outArr)):
+        for val in outArr[idx]:
+            outTxt += val
     
     return outTxt        
 
-inT = "Hello World"
-lista = transpose(inT, 6)
+inT = "Hore llWdlo"
+lista = transpose(inT, False)
 
-# for n in lista:
 # print(lista)
+print(lista)  
