@@ -21,7 +21,7 @@ def kontrollSiffra(personnummer):
     for idx, elem in enumerate(personnummer): # En enumerate loop som har ett count och en value, loopar igenom hela personnummret
         if not (((idx + 1)&1) == 0): # Kollar ifall indexet är udda för att "multiplcera varannan med 2"
             if int(elem) * 2 > 9: # Ifall talet * 2 är större en 10
-                for n in elem:
+                for n in str(int(elem) * 2):
                     siffersumma += int(n) # Addera varje siffrorna till siffersumman
             else:
                 siffersumma += int(elem) * 2 # addera till siffersumman plus multiplicera siffran med 2
