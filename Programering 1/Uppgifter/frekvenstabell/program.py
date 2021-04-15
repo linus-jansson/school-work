@@ -43,4 +43,4 @@ for n in activities:
 print("Aktivitet : Frekvens : Relativt Frekvens")
 for key, item in frekvenstabell.items():
     # Skriver ut nyckeln, antalet och procenten
-    print('{0:<12}{1:^13}{2:>12}%'.format(key, item, round(item/len(activities), 3)*100 ))    
+    print('{0:<12}{1:^13}{2:>12}%'.format(key, item, round(item/len(activities), 3)*100 ))    # :-)
