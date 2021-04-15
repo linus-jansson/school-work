@@ -17,7 +17,7 @@ def encrypt(txt, shiftAmount):
     out = ""
     
     for n in txt:
-        if not (ord(n) == 0 or ord(n) == 32):
+        if not (ord(n) == 0 or ord(n) == 32): # Hanterar mellanslag 
             out += shift(n, shiftAmount)
         else:
             out += chr(32)
@@ -40,12 +40,3 @@ def bruteForce(txt):
         tmp = "" # Tömmer den temporära strängen
     
     return attemps
-
-# inText = handleUpper(inText)
-
-# # print(encrypt(handleUpper(inText), shiftNum))
-# lista = bruteForce(encrypt(inText, shiftNum))
-
-# for n in lista:
-#     print(n)
-
