@@ -1,16 +1,7 @@
-inText = input("Skriv in ett ord eller flera för att kryptera > ")
-shiftNum = int(input("Med hur mycket vill du förskjuta varje ord? > "))
+# inText = input("Skriv in ett ord eller flera för att kryptera > ")
+# shiftNum = int(input("Med hur mycket vill du förskjuta varje ord? > "))
 
-def handleUpper(txt):
-    out = ""
-    # Går igenom varje bokstav / tecken i strängen och gör om den till en lite bokstav
-    for n in txt:
-        if n.isupper():
-            out += chr(ord(n) + 32)
-        else:
-            out += n
-    
-    return out
+
 
 # print(handleUpper("Hej jag heter linus")) # Testar funktionen över -> hej jag heter linus
 
@@ -50,11 +41,11 @@ def bruteForce(txt):
     
     return attemps
 
-inText = handleUpper(inText)
+# inText = handleUpper(inText)
 
-# print(encrypt(handleUpper(inText), shiftNum))
-lista = bruteForce(encrypt(inText, shiftNum))
+# # print(encrypt(handleUpper(inText), shiftNum))
+# lista = bruteForce(encrypt(inText, shiftNum))
 
-for n in lista:
-    print(n)
+# for n in lista:
+#     print(n)
 
