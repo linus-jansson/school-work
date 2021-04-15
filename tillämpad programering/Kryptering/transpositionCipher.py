@@ -17,7 +17,7 @@ def fillArray(txt, arr):
         arr[rCount][cCount] = txt[currentChar]
         cCount += 1
         currentChar += 1
-    print(arr)
+    # print(arr)
     
     return arr
 
@@ -40,8 +40,9 @@ def transposeMatrix(inArr, outArr):
 
     return outArr
 
-   
-def transposositionEncrypt(txt, rAmount, encrypt):
+
+
+def encrypt(txt, rAmount, encrypt):
     rows = rAmount
     cols = math.ceil(len(txt) / rows)
     
