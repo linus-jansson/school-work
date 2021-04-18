@@ -9,57 +9,49 @@
     
 </head>
 <body>
-    <div>
-        <header id="header">
-            <nav>
-                <ul class="menu">
-                    <li><h2 class="logo">Safe pass</h2></li>
-                    <li><a class="link" href="index.html">Hem</a></li>
-                    <li><a class="link" href="info.html">Info</a></li>
-                    <li><a class="link" href="generator.html">Generator</a></li>
-                </ul>
-            </nav>
-                
-        </header>
-        <main class="content">
-
-            <div>
-                <h1>Hej!!!</h1>
-                <p id="infoText">Välkommen till hemsidan som hjälper dig att skapa ett säkert lösenord, här finns också tips på hur du som användare på en site kan göra ditt konto säkrare mot hackers som vill komma åt dina konton</p>
-            </div>
+    <header id="header">
+        <nav>
+            <ul class="menu">
+                <li><h2 class="logo">Safe pass</h2></li>
+                <li><a class="link" href="index.html">Hem</a></li>
+                <li><a class="link" href="info/">Info</a></li>
+                <li><a class="link" href="generator/">Generator</a></li>
+            </ul>
+        </nav>
             
-            <div>
-                <h1>Tre snabba lösenordstips</h1>
-                <ol>
-                    <li>Säkert lösenord (generera ett under)</li>
-                    <li>Lösenordshanterare</li>
-                    <li>Två stegs verifering</li>
-                </ol>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia ullam ex necessitatibus quibusdam atque neque beatae distinctio inventore, alias porro recusandae asperiores nam sint, accusamus earum nisi eos quod magni?</p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia ullam ex necessitatibus quibusdam atque neque beatae distinctio inventore, alias porro recusandae asperiores nam sint, accusamus earum nisi eos quod magni?</p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia ullam ex necessitatibus quibusdam atque neque beatae distinctio inventore, alias porro recusandae asperiores nam sint, accusamus earum nisi eos quod magni?</p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia ullam ex necessitatibus quibusdam atque neque beatae distinctio inventore, alias porro recusandae asperiores nam sint, accusamus earum nisi eos quod magni?</p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia ullam ex necessitatibus quibusdam atque neque beatae distinctio inventore, alias porro recusandae asperiores nam sint, accusamus earum nisi eos quod magni?</p>
-            <!-- https://stackoverflow.com/questions/18445543/styling-a-disabled-input-with-css-only -->
-            <div id="passwordGeneratorBasic">
-                <h1>En simple lösenords generator</h1>
-                <input type="text" name="" id="generatedBasicPassword" value="qwerty123456" disabled>
-                <input type="button" value="Generera">
-                <input type="button" value="Kopiera" onclick="copyToClipboard('generatedBasicPassword')">
-            </div>
-        </main>
+    </header>
+    <main id="content">
 
-        <!-- Försök göra så att den trycks ner längst ner på sidan -->
-        <!-- https://css-tricks.com/couple-takes-sticky-footer/ -->
-        <footer id="footer">
-            <p id="copyright"></p>
-        </footer>
+        <div>
+            <h1>Hej!!!</h1>
+            <p id="infoText">Välkommen till hemsidan som hjälper dig att skapa ett säkert lösenord, här finns också tips på hur du som användare på en site kan göra ditt konto säkrare mot hackers som vill komma åt dina konton</p>
+        </div>
+        
+        <div>
+            <h1>Tre snabba lösenordstips</h1>
+            <ol>
+                <li>Säkert lösenord (generera ett under)</li>
+                <li>Lösenordshanterare</li>
+                <li>Två stegs verifering</li>
+            </ol>
+        </div>
+        <!-- https://stackoverflow.com/questions/18445543/styling-a-disabled-input-with-css-only -->
+        <div id="passwordGeneratorBasic">
+            <h1>En simple lösenords generator</h1>
+            <input type="text" name="" id="generatedBasicPassword" value="qwerty123456" disabled>
+            <input type="button" value="Generera" onclick="generatePassword('generatedBasicPassword')">
+            <input type="button" value="Kopiera" onclick="copyToClipboard('generatedBasicPassword')">
+        </div>
+    </main>
 
-    </div>
+    <!-- Försök göra så att den trycks ner längst ner på sidan -->
+    <!-- https://css-tricks.com/couple-takes-sticky-footer/ -->
+    <footer id="footer">
+        <p id="copyright"></p>
+    </footer>
+
 
 </body>
-    <script src="assets/scripts/password.js"></script>
     <script src="assets/scripts/main.js"></script>
     <script>
         document.getElementById("copyright").innerText = `Linus Jansson \u00A9 ${getYear()}`
