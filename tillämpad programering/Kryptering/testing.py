@@ -83,3 +83,14 @@ for current in range(4):
 for n in complete_list:
     if n == "he j":
         print(n)
+# # print(complete_list)
+
+
+def all_combos(s, l):
+    if l <= 10:
+        print(l)
+        all_combos(s, l + 1)
+
+
+all_combos("s", -10)
+
