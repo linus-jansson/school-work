@@ -1,6 +1,10 @@
 import caesarCipher as cc
 import transpositionCipher as tc
 
+
+# ÄNDRA SÅ ATT DEN HANTERAR STORA BOKSTÄVER I CEASAR CHIPER
+
+
 def handleUpper(txt):
     out = ""
     # Går igenom varje bokstav / tecken i strängen och gör om den till en lite bokstav
