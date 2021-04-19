@@ -40,19 +40,19 @@
 #         print(char, char2)
 
 
-def all_perms(s):
-    if len(s) <= 1: 
-        yield s
-    else:
-        for i in range(len(s)):
-            for p in all_perms(s[:i] + s[i+1:]):
-                yield s[i] + p
+# def all_perms(s):
+#     if len(s) <= 1: 
+#         yield s
+#     else:
+#         for i in range(len(s)):
+#             for p in all_perms(s[:i] + s[i+1:]):
+#                 yield s[i] + p
 
 
-allPerms = all_perms("password")
+# allPerms = all_perms("password")
 
-for n in allPerms:
-    print(n)
+# for n in allPerms:
+#     print(n)
 
 # charList = "abcde"
 
@@ -66,16 +66,20 @@ for n in allPerms:
 #     print(n)
 
 
-# your_list = 'ab'
-# complete_list = []
-# for current in range(3):
-#     a = [i for i in your_list]
-#     for y in range(current):
-#         print([x+i for i in your_list for x in a] )
-#         a = [x+i for i in your_list for x in a] 
-#         # print(complete_list)
-#         # print(a)
+your_list = 'abcdefghijklmn opqrstuvwxyz'
+complete_list = []
+for current in range(4):
+    a = [i for i in your_list]
+    for y in range(current):
+        print([x+i for i in your_list for x in a] )
+        a = [x+i for i in your_list for x in a] 
+        # print(complete_list)
+        # print(a)
         
-#     complete_list = complete_list+a
+    complete_list = complete_list+a
 
-# # print(complete_list)
+# print(complete_list)
+
+for n in complete_list:
+    if n == "he j":
+        print(n)
