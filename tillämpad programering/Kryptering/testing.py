@@ -66,31 +66,53 @@
 #     print(n)
 
 
-your_list = 'abcdefghijklmn opqrstuvwxyz'
-complete_list = []
-for current in range(4):
-    a = [i for i in your_list]
-    for y in range(current):
-        print([x+i for i in your_list for x in a] )
-        a = [x+i for i in your_list for x in a] 
-        # print(complete_list)
-        # print(a)
+# your_list = 'abcdefghijklmn opqrstuvwxyz'
+# complete_list = []
+# for current in range(4):
+#     a = [i for i in your_list]
+#     for y in range(current):
+#         print([x+i for i in your_list for x in a] )
+#         a = [x+i for i in your_list for x in a] 
+#         # print(complete_list)
+#         # print(a)
         
-    complete_list = complete_list+a
+#     complete_list = complete_list+a
 
 # print(complete_list)
 
-for n in complete_list:
-    if n == "he j":
-        print(n)
-# # print(complete_list)
+# for n in complete_list:
+#     if n == "he j":
+#         print(n)
+# # # print(complete_list)
 
 
-def all_combos(s, l):
-    if l <= 10:
-        print(l)
-        all_combos(s, l + 1)
+# def all_combos(s, l):
+#     if l <= 10:
+#         print(l)
+#         all_combos(s, l + 1)
 
 
-all_combos("s", -10)
+# all_combos("s", -10)
+import time
 
+def shift(char, shiftAmount):
+    return chr((ord(char) + shiftAmount - 97) % 26 + 97)
+
+def getCharNum(char):
+    return ord(char)
+
+shiftNum = 1
+char = 'a'
+attempt = ''
+
+while True:
+    time.sleep(0.5)
+    
+    print(char)
+
+    if getCharNum(char) == 122:
+        print("startar om")
+        attempt += char
+
+
+    char = shift(char, shiftNum)
