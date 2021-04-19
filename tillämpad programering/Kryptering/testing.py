@@ -40,19 +40,19 @@
 #         print(char, char2)
 
 
-def all_perms(s):
-    if len(s) <= 1: 
-        yield s
-    else:
-        for i in range(len(s)):
-            for p in all_perms(s[:i] + s[i+1:]):
-                yield s[i] + p
+# def all_perms(s):
+#     if len(s) <= 1: 
+#         yield s
+#     else:
+#         for i in range(len(s)):
+#             for p in all_perms(s[:i] + s[i+1:]):
+#                 yield s[i] + p
 
 
-allPerms = all_perms("password")
+# allPerms = all_perms("password")
 
-for n in allPerms:
-    print(n)
+# for n in allPerms:
+#     print(n)
 
 # charList = "abcde"
 
@@ -79,3 +79,13 @@ for n in allPerms:
 #     complete_list = complete_list+a
 
 # # print(complete_list)
+
+
+def all_combos(s, l):
+    if l <= 10:
+        print(l)
+        all_combos(s, l + 1)
+
+
+all_combos("s", -10)
+
