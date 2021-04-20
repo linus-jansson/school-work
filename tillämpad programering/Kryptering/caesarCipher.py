@@ -5,25 +5,26 @@
 
 # print(handleUpper("Hej jag heter linus")) # Testar funktionen över -> hej jag heter linus
 def shift(char, shiftAmount):
-    # EXAMPLE
+    # EXAMPLE -> chr((ord(char) + shiftAmount - 97) % 26 + 97) 
     # 122(z) + 1(shiftAmount) = 123
     # 123 - 97 = 26 
     # 26 % 26 = 0 + 97 = 97 = a
 
     if char.isupper():
         return chr((ord(char) + shiftAmount - 65) % 26 + 65)
+    elif char.islower():
+        return chr((ord(char) + shiftAmount - 97) % 26 + 97)    
+    elif ord(char) == 0 or ord(char) == 32:
+        return chr(32)
     else:
-        return chr((ord(char) + shiftAmount - 97) % 26 + 97)
+        return ''
 
     
 def encrypt(txt, shiftAmount):
     out = ""
     
     for n in txt:
-        if not (ord(n) == 0 or ord(n) == 32): # Hanterar mellanslag 
-            out += shift(n, shiftAmount)
-        else:
-            out += chr(32)
+        out += shift(n, shiftAmount)
     return out
 
 
@@ -35,10 +36,7 @@ def bruteForce(txt):
 
     for num in range(1, 26): 
         for n in txt:
-            if not (ord(n) == 0 or ord(n) == 32):
-                tmp += shift(n, num)
-            else:
-                tmp += chr(32)
+            tmp += shift(n, num)
         attemps.append(tmp) # lägger till det forcerade försöket i listan
         tmp = "" # Tömmer den temporära strängen
     
