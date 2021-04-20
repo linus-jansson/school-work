@@ -93,26 +93,57 @@
 
 
 # all_combos("s", -10)
-import time
 
-def shift(char, shiftAmount):
-    return chr((ord(char) + shiftAmount - 97) % 26 + 97)
+#import time
+#
+#def shift(char, shiftAmount):
+#    return chr((ord(char) + shiftAmount - 97) % 26 + 97)
+#
+#def getCharNum(char):
+#    return ord(char)
+#
+#shiftNum = 1
+#char = 'a'
+#attempt = ''
+#
+#while True:
+#    time.sleep(0.5)
+#    
+#    print(char)
+#
+#    if getCharNum(char) == 122:
+#        print("startar om")
+#        attempt += char
+#
+#    char = shift(char, shiftNum)
 
-def getCharNum(char):
-    return ord(char)
-
-shiftNum = 1
-char = 'a'
-attempt = ''
-
-while True:
-    time.sleep(0.5)
-    
-    print(char)
-
-    if getCharNum(char) == 122:
-        print("startar om")
-        attempt += char
+# your_list = 'abc'
+# complete_list = []
+# for current in range(4):
+#     a = [i for i in your_list]
+#     for y in range(current):
+#         a = [x+i for i in your_list for x in a] 
+#         # print(complete_list)
+#         # print(a)
+#         print(a, len(a), end="\n") 
+#     complete_list = complete_list+a
 
 
-    char = shift(char, shiftNum)
+
+# password = "hej"
+
+# for n in range(len(password)):
+#     pass
+
+
+
+inPassword = "qwerty"
+password = list(inPassword)
+# Varje bokstav i försöket ska storeas i listan test ['a', 'a', 'z', 'a']
+test = password
+
+print(password)
+for n in range(len(password)):
+    if test == password:
+        print("Ja!")
+        break

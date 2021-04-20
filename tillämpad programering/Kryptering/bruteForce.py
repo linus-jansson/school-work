@@ -5,14 +5,14 @@ def passeradTid():
     return time.time()
 
 def bruteForce(passwordToCrack):
-    permuationResult = ""
+    list(passwordToCrack)
+    test = []
     isDone = False
     listOfChars = "abcdefghijklmnopqrstuvwxyz"
     
-
     while isDone == False:        
         permuationResult += passwordToCrack
-        if permuationResult == passwordToCrack:
+        if test == passwordToCrack:
             isDone = True
             # Returnerar den passerade tiden då lösenordet blev knäcked
             return (passeradTid(), permuationResult)
