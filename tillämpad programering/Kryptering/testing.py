@@ -141,6 +141,7 @@ inPassword = "qwerty"
 password = list(inPassword)
 # Varje bokstav i försöket ska storeas i listan test ['a', 'a', 'z', 'a']
 test = password
+# https://stackoverflow.com/questions/21939652/insert-at-first-position-of-a-list-in-python
 
 print(password)
 for n in range(len(password)):
