@@ -5,19 +5,19 @@ import transpositionCipher as tc
 # ÄNDRA SÅ ATT DEN HANTERAR STORA BOKSTÄVER I CEASAR CHIPER
 
 
-def handleUpper(txt):
-    out = ""
-    # Går igenom varje bokstav / tecken i strängen och gör om den till en lite bokstav
-    for n in txt:
-        if n.isupper():
-            out += chr(ord(n) + 32)
-        else:
-            out += n
-    
-    return out
+#def handleUpper(txt):
+#    out = ""
+#    # Går igenom varje bokstav / tecken i strängen och gör om den till en lite bokstav
+#    for n in txt:
+#        if n.isupper():
+#            out += chr(ord(n) + 32)
+#        else:
+#            out += n
+#    
+#    return out
 
-textToEncrypt = handleUpper(input("Skriv in ett ord eller en mening ska hanteras > "))
-encryptOrDecrypt = bool(input("Ska det krypteras eller avkrypteras? (True eller False) > "))
+textToEncrypt = input("Skriv in ett ord eller en mening ska hanteras > ")
+encryptOrDecrypt = bool(input("Ska det krypteras(1) eller avkrypteras?(0) > "))
 choosenProgram = input("Hur vill du köra? \n1 - Caesar Chiper\n2 - Transposition Chiper\nq - avsluta\n>> ")
 
 while True:

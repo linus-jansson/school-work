@@ -4,14 +4,17 @@
 
 
 # print(handleUpper("Hej jag heter linus")) # Testar funktionen över -> hej jag heter linus
-
 def shift(char, shiftAmount):
     # EXAMPLE
     # 122(z) + 1(shiftAmount) = 123
     # 123 - 97 = 26 
     # 26 % 26 = 0 + 97 = 97 = a
 
-    return chr((ord(char) + shiftAmount - 97) % 26 + 97)
+    if char.isupper():
+        return chr((ord(char) + shiftAmount - 65) % 26 + 65)
+    else:
+        return chr((ord(char) + shiftAmount - 97) % 26 + 97)
+
     
 def encrypt(txt, shiftAmount):
     out = ""
