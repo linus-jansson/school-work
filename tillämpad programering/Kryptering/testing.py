@@ -135,15 +135,14 @@
 # for n in range(len(password)):
 #     pass
 
-
+# [(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
+# [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
 
 inPassword = "qwerty"
 password = list(inPassword)
 # Varje bokstav i försöket ska storeas i listan test ['a', 'a', 'z', 'a']
-test = password
-# https://stackoverflow.com/questions/21939652/insert-at-first-position-of-a-list-in-python
+test = []
 
-print(password)
 for n in range(len(password)):
     if test == password:
         print("Ja!")
