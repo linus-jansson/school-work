@@ -33,14 +33,27 @@ function getInputVal(elmId) {
     }
 }
 
-function generatePassword(id) {
+function updatePassword(id, length, textId)
+{
+    generatePassword(id, length)
+    var l = document.getElementById(length).value
+
+    document.getElementById(textId).innerHTML = `Längden: ${l}`;
+}
+
+function generatePassword(id, length) {
     var input = document.getElementById(id)
 
-    var length = 16;
+    // Ifall det är ett nummer så ska den använda det som längd ananrs så ka den ta värdet på slidern
+    if (!isNaN(length))
+        var l = length;
+    else    
+        var l = document.getElementById(length).value
+
     var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#%&/()={}?_-";
     var password = "";
 
-    for (var i = 0, n = charset.length; i < length; ++i) {
+    for (var i = 0, n = charset.length; i < l; ++i) {
         password += charset.charAt(Math.floor(Math.random() * n));
     }
 

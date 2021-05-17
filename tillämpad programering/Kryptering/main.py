@@ -124,27 +124,25 @@ def traspositionBruteForce(string, comparing):
         return "Kunde inte hitta rätt lösenord"
     
 
-
-
 def passerad_tid():
     return time.time()
 
 
 # Knäcka lösenord med en rekrussiv funktion
-def bruteForce(current, passwordToCrack):
-    # Om längden på längden på försök strängen är längre än lösenordet så ska den avsluta     
+def bruteForce(current, passwordToCrack, alfabet):
+    # Om längden på försök strängen är längre än lösenordet så ska den avsluta     
     if len(current) >= len(passwordToCrack):
         return None
  
     # För varje karaktär i alfabetet     
-    for char in "abcdefghijklmnopqrstuvwxyz":
-        # Lägg på nuvarande test med bokstaven
+    for char in alfabet:
+        # Lägg på nuvarande test med bokstaven den är på i for-loopen
         newTest = current + char
         # Kolla ifall testet är lika med lösenordet
         if newTest == passwordToCrack:
             return {"password": newTest, "p_time": passerad_tid()}
         # Annars gör samma sak igen och spara de den returnerar
-        isPassword = bruteForce(newTest, passwordToCrack)
+        isPassword = bruteForce(newTest, passwordToCrack, alfabet)
 
         # Kollar ifall det funktionen returnerar inte är lika med if-statsen jag kollar över
         # Antingen så är det None eller så är det det knäckta lösenordet
@@ -153,56 +151,108 @@ def bruteForce(current, passwordToCrack):
 
 
 # Ett annat sätt att knäcka lösenord. Genom att bara testa sig fram slumpmässigt
-def randomBruteForce(passwordToCrack):
+def randomBruteForce(passwordToCrack, alfabet):
     test = ""
     while passwordToCrack != test:
-        test = ''.join(random.choice("abcdefghijklmnopqrstuvwxyz") for _ in range(len(passwordToCrack)))
+        test = ''.join(random.choice(alfabet) for _ in range(len(passwordToCrack)))
     return {"password": test, "p_time": passerad_tid()}
 
+def randomPassword(length, chars):
+    return ''.join(random.choice(chars) for _ in range(length))
 
 def main():
-    for test in traspositionBruteForce("Irmd åadnged taä g", "Idag är det måndag"):
-        print(test)
+
     choosenProgram = input("Vilket av följande program vill du köra? \n1 - Caesar Chiper\n2 - Transposition Chiper\n3 - Knäcka ett lösenord med bruteforce\nq - avsluta\n>> ")
 
     while True:
         if choosenProgram == "1":
-            shiftAmount = int(input("Hur många steg ska varje bokstav skiftas med? > "))
-            encrypt = input("Ska texten krypteras (1 / True) eller avkrypteras (0 / False)")
+            crack = input("Vill du knäcka ett lösenord? (1 / True) eller (0 / False) > ")
 
-            if encrypt == "True" or encrypt == "true" or encrypt == "1":
-                inText = input("Skriv in ett ord eller en mening ska krypters > ")
-            elif encrypt == "False" or encrypt == "false" or encrypt == "0":
-                inText = input("Skriv in ett ord eller en mening ska avkrypteras > ")
-                shiftAmount *= -1
+            if crack == "True" or crack == "true" or crack == "1":
+                inText = input("Skriv in ett ord eller en mening som ska knäckas > ")
+                outList = caesarBruteForce(inText)
 
-            outText = caesarEncrypt(inText, shiftAmount)
+                for n in outList:
+                    print(n)
 
-            print(f"Texten '{inText}' krypterades till '{outText}'")
+                break
+            elif crack == "False" or crack == "false" or crack == "0":
+                shiftAmount = int(input("Hur många steg ska varje bokstav skiftas med? > "))
+                encrypt = input("Ska texten krypteras (1 / True) eller avkrypteras (0 / False)")
 
-            break
-        elif choosenProgram == "2":
-            rows = int(input("Hur många rader ska det vara i matrisen? "))
-            
-            inText = input("Skriv in ett ord eller en mening ska hanteras > ")
-            
-            encrypt = input("Ska texten krypteras (1 / True) eller avkrypteras (0 / False)")
+                if encrypt == "True" or encrypt == "true" or encrypt == "1":
+                    inText = input("Skriv in ett ord eller en mening ska krypters > ")
+                elif encrypt == "False" or encrypt == "false" or encrypt == "0":
+                    inText = input("Skriv in ett ord eller en mening ska avkrypteras > ")
+                    shiftAmount *= -1
 
-            if encrypt == "True" or encrypt == "true" or encrypt == "1":
-                outText = transpositionEncrypt(inText, rows, True)
+                outText = caesarEncrypt(inText, shiftAmount)
+
                 print(f"Texten '{inText}' krypterades till '{outText}'")
-            elif encrypt == "False" or encrypt == "false" or encrypt == "0":
-                outText = transpositionEncrypt(inText, rows, False)
-                print(f"Texten '{inText}' avkrypterades till '{outText}'")
-            
+
+                break   
+            else:
+                crack = input("Vill du knäcka ett lösenord? (1 / True) eller (0 / False) > ")
+
+        elif choosenProgram == "2":
+            crack = input("Vill du knäcka ett lösenord? (1 / True) eller (0 / False) > ")
+
+            if crack == "True" or crack == "true" or crack == "1":
+                inText = input("Skriv in ett ord eller en mening som ska knäckas > ")
+                comparison = input("Skriv ett ord eller en mening som du vill jämföra mo > ")
+
+                outList = traspositionBruteForce(inText, comparison)
+                
+                for n in outList:
+                    print(n)
+
+                break
+            elif crack == "False" or crack == "false" or crack == "0":
+                rows = int(input("Hur många rader ska det vara i matrisen? "))
+                
+                inText = input("Skriv in ett ord eller en mening ska hanteras > ")
+                
+                encrypt = input("Ska texten krypteras (1 / True) eller avkrypteras (0 / False) > ")
+
+                if encrypt == "True" or encrypt == "true" or encrypt == "1":
+                    outText = transpositionEncrypt(inText, rows, True)
+                    print(f"Texten '{inText}' krypterades till '{outText}'")
+                elif encrypt == "False" or encrypt == "false" or encrypt == "0":
+                    outText = transpositionEncrypt(inText, rows, False)
+                    print(f"Texten '{inText}' avkrypterades till '{outText}'")
+                
+                break
+            else:
+                crack = input("Vill du knäcka ett lösenord? (1 / True) eller (0 / False) > ")
+
             break
         elif choosenProgram == "3":
-            passwordToCrack = input("Vad är vilket lösenord vill du jämföra med? ")
 
-            start_time = time.time()
-            response = bruteForce("", passwordToCrack)
+            alfabetShort = "abcdefghijklmnopqrstuvwxyz"
+            alfabetLong = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!_-" 
+
             
-            print(response)
+            length = int(input("Hur många karaktärer ska det slumpmässiga lösenordet vara? > "))
+
+            if length > 4:
+                print(f">> Detta kan ta väldigt lång tid då datorn behöver göra {len(alfabetLong) ** length} permutationer för lösenordet med fler tecken")
+
+            print(f"Påbörjar test 1 med följande tecken ({alfabetShort})...")
+            passwordToCrack = randomPassword(length, alfabetShort) 
+            start_time1 = time.time()
+            response1 = bruteForce("", passwordToCrack, alfabetShort)
+
+            print(f"Påbörjar test 2 med följande tecken ({alfabetLong})...")
+            passwordToCrack = randomPassword(length, alfabetLong) 
+            start_time2 = time.time()
+            response2 = bruteForce("", passwordToCrack, alfabetLong)
+            
+            if response1 is not None or response2 is not None:
+                print(f">> Att knäcka lösenordet '{response1['password']}' tog programmet {round(response1['p_time'] - start_time1, 5)} sekunder")
+                print(f">> Att knäcka lösenordet '{response2['password']}' tog programmet {round(response2['p_time'] - start_time2, 5)} sekunder")            
+            else:
+                print(">> Kunde inte hitta lösenordet")
+
             break
         elif choosenProgram == "q":
             break
