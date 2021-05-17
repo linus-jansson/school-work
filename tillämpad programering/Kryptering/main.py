@@ -9,15 +9,23 @@ def shift(char, shiftAmount):
     # 123 - 97 = 26 
     # 26 % 26 = 0 + 97 = 97 = a
 
-    # Hanterar gemener och versaler
-    if char.isupper():
-        return chr((ord(char) + shiftAmount - 65) % 26 + 65)
-    elif char.islower():
-        return chr((ord(char) + shiftAmount - 97) % 26 + 97)    
-    elif ord(char) == 0 or ord(char) == 32: # hanterar mellanslag
-        return chr(32)
+    # Hanterar icke ascii tecken
+    if char == 'å':
+        return 'å'
+    elif char == 'ä':
+        return 'ä'
+    elif char == 'ö':
+        return 'ö'
     else:
-        return ''
+         # Hanterar gemener och versaler
+        if char.isupper():
+            return chr((ord(char) + shiftAmount - 65) % 26 + 65)
+        elif char.islower():
+            return chr((ord(char) + shiftAmount - 97) % 26 + 97)    
+        elif ord(char) == 0 or ord(char) == 32: # hanterar mellanslag
+            return chr(32)
+        else:
+            return ''
 
     
 def caesarEncrypt(txt, shiftAmount):
@@ -84,18 +92,38 @@ def transposeMatrix(inArr, outArr):
     return outArr
 
 
-def transpositionEncrypt(txt, rAmount, encrypt):
-    rows = rAmount
-    cols = math.ceil(len(txt) / rows)
+def transpositionEncrypt(txt, cAmount, encrypt):
+    cols = cAmount
+    rows = math.ceil(len(txt) / cols)
     
     if encrypt: 
-        arr = fillArray(txt, [["" for n in range(cols)] for m in range(rows)])
-        outArr = transposeMatrix(arr, [["" for n in range(rows)] for m in range(cols)]) # Skapar en array/lista som är omvänd jämfört med orginella listan
-    else:
+        arr = fillArray(txt, [["" for n in range(cols)] for m in range(rows)]) # fyller en lista med en sträng
+        print("Fyll listan: ", arr)
+        outArr = transposeMatrix(arr, [["" for n in range(rows)] for m in range(cols)])  # Vänder på listan
+        print("Vända listan", outArr)
+    else: # Meddelandet ska avkrypteras då så börjar arrayen som omvänd jämfört med den orginella
         arr = fillArray(txt, [["" for n in range(rows)] for m in range(cols)])
-        outArr = transposeMatrix(arr, [["" for n in range(cols)] for m in range(rows)]) # Skapar en array/lista som är omvänd jämfört med orginella listan
+        outArr = transposeMatrix(arr, [["" for n in range(cols)] for m in range(rows)])
     
     return matrixToString(outArr)
+
+
+def traspositionBruteForce(string, comparing):
+    tests = [] 
+    n = 1
+
+    while n < 100:
+        current = transpositionEncrypt(string, n, False)
+        tests.append(current)
+
+        if current == comparing:
+            return tests
+
+        n += 1
+    else:
+        return "Kunde inte hitta rätt lösenord"
+    
+
 
 
 def passerad_tid():
@@ -133,38 +161,45 @@ def randomBruteForce(passwordToCrack):
 
 
 def main():
-    
+    for test in traspositionBruteForce("Irmd åadnged taä g", "Idag är det måndag"):
+        print(test)
     choosenProgram = input("Vilket av följande program vill du köra? \n1 - Caesar Chiper\n2 - Transposition Chiper\n3 - Knäcka ett lösenord med bruteforce\nq - avsluta\n>> ")
 
     while True:
         if choosenProgram == "1":
             shiftAmount = int(input("Hur många steg ska varje bokstav skiftas med? > "))
-            encrypt = input("Ska de texten krypteras (1 / True) eller avkrypteras (0 / False)")
+            encrypt = input("Ska texten krypteras (1 / True) eller avkrypteras (0 / False)")
 
             if encrypt == "True" or encrypt == "true" or encrypt == "1":
-                textToEncrypt = input("Skriv in ett ord eller en mening ska krypters > ")
+                inText = input("Skriv in ett ord eller en mening ska krypters > ")
             elif encrypt == "False" or encrypt == "false" or encrypt == "0":
-                textToEncrypt = input("Skriv in ett ord eller en mening ska avkrypteras > ")
+                inText = input("Skriv in ett ord eller en mening ska avkrypteras > ")
                 shiftAmount *= -1
 
-            encryptedText = caesarEncrypt(textToEncrypt, shiftAmount)
+            outText = caesarEncrypt(inText, shiftAmount)
 
-            print(f"Texten '{textToEncrypt}' krypterades till '{encryptedText}'")
+            print(f"Texten '{inText}' krypterades till '{outText}'")
 
             break
         elif choosenProgram == "2":
             rows = int(input("Hur många rader ska det vara i matrisen? "))
             
-            textToEncrypt = input("Skriv in ett ord eller en mening ska hanteras > ")
-            encryptOrDecrypt = bool(input("Ska det krypteras(1) eller avkrypteras?(0) > "))
+            inText = input("Skriv in ett ord eller en mening ska hanteras > ")
+            
+            encrypt = input("Ska texten krypteras (1 / True) eller avkrypteras (0 / False)")
 
-            encryptedText = transpositionEncrypt(textToEncrypt, rows, encryptOrDecrypt)
-
-            print(f"Texten '{textToEncrypt}' krypterades till '{encryptedText}'")
+            if encrypt == "True" or encrypt == "true" or encrypt == "1":
+                outText = transpositionEncrypt(inText, rows, True)
+                print(f"Texten '{inText}' krypterades till '{outText}'")
+            elif encrypt == "False" or encrypt == "false" or encrypt == "0":
+                outText = transpositionEncrypt(inText, rows, False)
+                print(f"Texten '{inText}' avkrypterades till '{outText}'")
+            
+            break
         elif choosenProgram == "3":
             passwordToCrack = input("Vad är vilket lösenord vill du jämföra med? ")
+
             start_time = time.time()
-            
             response = bruteForce("", passwordToCrack)
             
             print(response)
@@ -172,8 +207,8 @@ def main():
         elif choosenProgram == "q":
             break
         else:
-            print("Detta program finns inte i listan av program")
-            choosenProgram = input("Hur vill du köra? \n1 - Caesar Chiper\n2 - Transposition Chiper\nq - avsluta\n>> ")
+            print("Alternativet du valde finns inte i listan av program")
+            choosenProgram = input("Vilket av följande program vill du köra? \n1 - Caesar Chiper\n2 - Transposition Chiper\n3 - Knäcka ett lösenord med bruteforce\nq - avsluta\n>> ")
 
 
 if __name__ == "__main__":
