@@ -138,12 +138,13 @@
 # [(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
 # [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
 
-inPassword = "qwerty"
-password = list(inPassword)
-# Varje bokstav i försöket ska storeas i listan test ['a', 'a', 'z', 'a']
-test = []
+# inPassword = "qwerty"
+# password = list(inPassword)
+# # Varje bokstav i försöket ska storeas i listan test ['a', 'a', 'z', 'a']
+# test = []
 
-for n in range(len(password)):
-    if test == password:
-        print("Ja!")
-        break
+# for n in range(len(password)):
+#     if test == password:
+#         print("Ja!")
+#         break
+
