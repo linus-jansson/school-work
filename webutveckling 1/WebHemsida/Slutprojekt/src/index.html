@@ -40,8 +40,8 @@
         <!-- https://stackoverflow.com/questions/18445543/styling-a-disabled-input-with-css-only -->
         <div id="passwordGeneratorBasic">
             <h1>En simple lösenords generator</h1>
-            <input type="text" name="" id="generatedBasicPassword" value="qwerty123456" disabled>
-            <input type="button" value="Generera" onclick="generatePassword('generatedBasicPassword', 16)">
+            <input type="text" id="generatedBasicPassword" onload="" disabled>
+            <input type="button" value="Generera" onclick="generatePassword('generatedBasicPassword', 12)">
             <input type="button" value="Kopiera" onclick="copyToClipboard('generatedBasicPassword')">
         </div>
     </main>
@@ -57,5 +57,12 @@
     <script src="assets/scripts/main.js"></script>
     <script>
         document.getElementById("copyright").innerText = `Linus Jansson \u00A9 ${getYear()}`
+    </script>
+    <script>
+
+        /* Gör ett random lösenord automatiskt när sidan laddat in */
+        document.addEventListener('DOMContentLoaded', function() {
+            generatePassword('generatedBasicPassword', 12)
+        }, false);
     </script>
 </html>

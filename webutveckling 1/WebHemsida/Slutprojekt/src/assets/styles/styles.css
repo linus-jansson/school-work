@@ -5,10 +5,16 @@
 */
 
 :root {
-    --background_color: rgb(255, 255, 255);
-    --links: rgb(0, 0, 0);
+    --background_color: rgb(35, 31, 41);
+    --links: rgb(255, 255, 255);
+    --text-larger: rgb(255, 255, 255);
+    --text-smaller: #cacaca; 
     --links_hover: rgb(255, 0, 0);
+    --main_color: rgb(42, 45, 49);
+    
 }
+
+
 
 /* * {
     margin: 0;
@@ -17,6 +23,8 @@
 
 html, body {
     height: 100%;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
@@ -27,19 +35,30 @@ body {
 header {
     display: flex;
     flex-direction: row;
-    background-color: #e2e2e2;
+    background-color: var(--main_color);
+    border-radius: 10px;
 }
 nav {
     margin-left: auto;
     margin-right: 20px;
 }  
- 
-#logo {
-    padding: 15px;
-    margin-left: 20px;
+
+h1, h2, h3, h4 {
+    color: var(--text-larger)
 }
 
-#menu {
+p, a, li {
+    color: var(--text-smaller);
+}
+ 
+#logo {
+    
+    padding: 15px;
+    margin-left: 20px;
+
+    color: var(--text);
+    font-size: larger;
+    font-weight: bold;
 }
 
 #menu li {
@@ -67,8 +86,22 @@ nav {
 
 #content {
     flex: 1 0 auto;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    text-align: center;
+    background-color: var(--main_color);
+
+    border-radius: 12px;
+
+    box-shadow: 0px 0px 93px -9px rgba(0, 0, 0, 0.56);
+    -webkit-box-shadow: 0px 0px 93px -9px rgba(0, 0, 0, 0.56);
+    -moz-box-shadow: 0px 0px 93px -9px rgba(0, 0, 0, 0.56);
+
 }
 
 input:disabled {
@@ -82,6 +115,6 @@ input:disabled {
     flex-shrink: 0;
     padding: 15px;
     text-align: center;
-    background-color: #e2e2e2;
+    background-color: var(--main_color);
 }
 
