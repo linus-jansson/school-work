@@ -14,6 +14,10 @@ function updatePassword(id, length, textId)
 {
     generatePassword(id, length)
     var l = document.getElementById(length).value
+    if (l < 8)
+        document.getElementById(id).style = "color: red;"
+    else
+        document.getElementById(id).style = "color: green; font-weight: bold;"
 
     document.getElementById(textId).innerHTML = `Längden: ${l}`;
 }

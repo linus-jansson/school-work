@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>website name - home</title>
+    <title>SafePass - Home</title>
 
     <link rel="stylesheet" href="assets/styles/styles.css">
     
 </head>
 <body>
     <header>
-        <div id="logo"><h2>Safe pass</h2> </div>
+        <div id="logo"><h2>SafePass</h2> </div>
 
         <nav>    
             <ul id="menu">
@@ -25,24 +25,33 @@
     <main id="content">
 
         <div>
-            <h1>Hej!!!</h1>
-            <p id="infoText">Välkommen till hemsidan som hjälper dig att skapa ett säkert lösenord, här finns också tips på hur du som användare på en site kan göra ditt konto säkrare mot hackers som vill komma åt dina konton</p>
+            <h1>Welcome to SafePass!</h1>
+            <p class="infoText">Välkommen till hemsidan som hjälper dig att skapa ett säkert lösenord, här finns också tips på hur du som användare på en site kan göra ditt konto säkrare mot hackers som vill komma åt dina konton</p>
         </div>
         
         <div>
-            <h1>Tre snabba lösenordstips</h1>
+            <h1>Three fast password tips</h1>
             <ol>
-                <li>Säkert lösenord (generera ett under)</li>
-                <li>Lösenordshanterare</li>
-                <li>Två stegs verifering</li>
+                <li>Safe password (containing a-z, A-Z, 0-9 and special characters)</li>
+                <li>An <a href="info/">recommended</a> passwordmanager</li>
+                <li>Two Step Verification</li>
             </ol>
         </div>
         <!-- https://stackoverflow.com/questions/18445543/styling-a-disabled-input-with-css-only -->
-        <div id="passwordGeneratorBasic">
-            <h1>En simple lösenords generator</h1>
-            <input type="text" id="generatedBasicPassword" onload="" disabled>
-            <input type="button" value="Generera" onclick="generatePassword('generatedBasicPassword', 12)">
-            <input type="button" value="Kopiera" onclick="copyToClipboard('generatedBasicPassword')">
+        <div id="passwordGenerator">
+            <h1>Passwordgenerator</h1>
+            <p class="infoText">This generator is made to make it easier for you to create passwords of your preferred length! The standard is at 12 charachters but you can ofcourse change it to something that suits you!</p>
+            <input type="text" name="" id="generatedPassword" disabled>
+            <input type="range" name="" min="2" max="64" value="12" style="width: 250px;" id="passwordLength" onchange="updatePassword('generatedPassword', 'passwordLength', 'length-text')">
+            <div>
+                <a href="javascript:void(0)" class="btn btn-white btn-animate" onclick="generatePassword('generatedPassword', 'passwordLength')">Generate</a>
+            </div>
+            <div>
+                <a href="javascript:void(0)" class="btn btn-white btn-animate" onclick="copyToClipboard('generatedPassword')">Copy To Clipboard</a>
+            </div>
+        </div>
+        <div>
+            <p id="length-text"></p>
         </div>
     </main>
 
@@ -56,13 +65,12 @@
 </body>
     <script src="assets/scripts/main.js"></script>
     <script>
-        document.getElementById("copyright").innerText = `Linus Jansson \u00A9 ${getYear()}`
+        document.getElementById("copyright").innerText = `Linus Jansson \u00A9 SafePass ${getYear()}`
     </script>
     <script>
-
         /* Gör ett random lösenord automatiskt när sidan laddat in */
         document.addEventListener('DOMContentLoaded', function() {
-            generatePassword('generatedBasicPassword', 12)
+            updatePassword('generatedPassword', 'passwordLength', 'length-text')
         }, false);
     </script>
 </html>

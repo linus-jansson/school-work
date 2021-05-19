@@ -54,7 +54,7 @@ p, a, li {
 #logo {
     
     padding: 15px;
-    margin-left: 20px;
+    margin-left: 25px;
 
     color: var(--text);
     font-size: larger;
@@ -80,12 +80,78 @@ p, a, li {
     transition:.2s;
 }
 
-.link:hover {
+.link:hover, a:hover {
     color: var(--links_hover);
+}
+
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    position: absolute;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
+}
+
+.btn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+}
+
+.btn-white::after {
+    background-color: #fff;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-animated {
+    animation: moveInBottom 5s ease-out;
+    animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
 
 #content {
     flex: 1 0 auto;
+    
     margin-left: 20%;
     margin-right: 20%;
     margin-top: 50px;
@@ -94,21 +160,25 @@ p, a, li {
     padding-right: 10px;
 
     text-align: center;
-    background-color: var(--main_color);
-
+    
     border-radius: 12px;
 
+    background-color: var(--main_color);
     box-shadow: 0px 0px 93px -9px rgba(0, 0, 0, 0.56);
     -webkit-box-shadow: 0px 0px 93px -9px rgba(0, 0, 0, 0.56);
     -moz-box-shadow: 0px 0px 93px -9px rgba(0, 0, 0, 0.56);
 
 }
 
+.infoText {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
 input:disabled {
     color: red;
     text-align: center;
 }
-
 
 
 #footer {
