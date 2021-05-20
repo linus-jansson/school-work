@@ -19,7 +19,7 @@ function updatePassword(id, length, textId)
     else
         document.getElementById(id).style = "color: green; font-weight: bold;"
 
-    document.getElementById(textId).innerHTML = `Längden: ${l}`;
+    document.getElementById(textId).innerHTML = `Password Length: ${l}`;
 }
 
 function generatePassword(id, length) {
