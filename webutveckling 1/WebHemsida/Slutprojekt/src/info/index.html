@@ -6,7 +6,9 @@
     <title>SafePass - Home</title>
 
     <link rel="stylesheet" href="/assets/styles/styles.css">
-    
+
+    <link rel="stylesheet" href="../assets/styles/owl.carousel.min.css">
+    <link rel="stylesheet" href="../assets/styles/owl.theme.default.min.css">
 </head>
 <body>
     <header>
@@ -32,21 +34,58 @@
 
         <div class="sub_content">
             <h1>Ways of keeping a account secure</h1>
-            <p class="infoText">In this part I wil go through some easy ways of </p>    
+            <p class="infoText">In this part I wil go through some easy ways of keeping your account safe</p>    
             
             <h3>Two Step Verification / Two Factor Authentication</h3>
-            <p>2FA or so called Two Factor Authentication is a way of proving that you are the one that is trying to log into your accunt. By combining something you know like your password with something that you have for example your phone is a way of proving this.</p>
-            <p>The most common 2FA works by you typing in a code on the website from your phone that is generated every 30 seconds after you have typed in your password.</p>
-            <p>In the next couple of steos I will go trough how to enable 2FA for google</p>
+            <p class="infoText">2FA or so called Two Factor Authentication is a way of proving that you are the one that is trying to log into your accunt. By combining something you know like your password with something that you have for example your phone is a way of proving this.</p>
+            <p class="infoText">The most common 2FA works by you typing in a code on the website from your phone that is generated every 30 seconds after you have typed in your password.</p>
+            <p class="infoText">In the next couple of steps I will go trough how to enable 2FA for google</p>
 
+        </div>
+        <style>
+        .top-left {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+        }
+        </style>
+        <!-- Set up your HTML -->
+        <div class="owl-carousel owl-theme">
+            <div class="item">
+                <img src="/download.jpg" alt=""> 
+                <h1 class="top-left">1)</h1>
+            </div>
+            <div class="item">
+                <img src="/download.jpg" alt=""> 
+                <h1 class="top-left">2)</h1>
+            </div>
+            <div class="item">
+                <img src="/download.jpg" alt=""> 
+                <h1 class="top-left">3)</h1>
+            </div>
+            <div class="item">
+                <img src="/download.jpg" alt=""> 
+                <h1 class="top-left">4)</h1>
+            </div>
+            <div class="item">
+                <img src="/download.jpg" alt=""> 
+                <h1 class="top-left">5)</h1>
+            </div>
+            <div class="item">
+                <img src="/download.jpg" alt=""> 
+                <h1 class="top-left">6)</h1>
+            </div>
+        </div>
+
+        <div class="sub_content">
 
             <h3>Using a passwordgenerator</h3>
-            <p>Using a hard and complicated password may be tedious especially when creating it. But if its hard for you its even harder for the hacker. </p>
+            <p class="infoText">Using a hard and complicated password may be tedious especially when creating it. But if its hard for you its even harder for the hacker. </p>
 
             <h3>Passwordmanagers</h3>
-            <p>As said, long password are tedious. If you don't know how to store them securley there are a lot of password managers out there that can help you with that. You just need to create an account and add your passwords there and most of the passwordmanagers will autofill the password for you on the website.</p>
-            <p>By doing this you don't need to think about where your passwords are and its even recommended by Saftey Specialists because password managers keep the password more safe than you can.</p>
-            <p>Below I've listed a few popular password managers that many people recommend</p>
+            <p class="infoText">As said, long password are tedious. If you don't know how to store them securley there are a lot of password managers out there that can help you with that. You just need to create an account and add your passwords there and most of the passwordmanagers will autofill the password for you on the website.</p>
+            <p class="infoText">By doing this you don't need to think about where your passwords are and its even recommended by Saftey Specialists because password managers keep the password more safe than you can.</p>
+            <p class="infoText">Below I've listed a few popular password managers that many people recommend</p>
             <ul>
                 <li><a href="#">Test</a></li>
                 <li><a href="#">Test</a></li>
@@ -68,10 +107,20 @@
 
 </body>
     <script src="/assets/scripts/main.js"></script>
+
+    <script src="../assets/scripts/jquery-3.6.0.min.js"></script>
+    <script src="../assets/scripts/owl.carousel.min.js"></script>
     <script>
         /* Gör ett random lösenord automatiskt när sidan laddat in */
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("copyright").innerText = `Linus Jansson \u00A9 SafePass ${getYear()}`
         }, false);
+
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+                loop:true,
+                margin:30,
+            });
+        });
     </script>
 </html>

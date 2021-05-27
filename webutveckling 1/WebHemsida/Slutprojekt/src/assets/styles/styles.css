@@ -125,6 +125,12 @@ p, a, li {
     text-align: center;
 }
 
+.owl-carousel {
+    border-color: aqua;
+    border: 10px;
+    padding-top: 100px;
+}
+
 .btn {
     margin: 10px;
 }
