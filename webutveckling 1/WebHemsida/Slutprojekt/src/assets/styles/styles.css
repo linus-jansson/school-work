@@ -131,6 +131,13 @@ p, a, li {
     padding-top: 70px;
 }
 
+.carousel_text {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    color: red;
+}
+
 .btn {
     margin: 10px;
 }
