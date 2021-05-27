@@ -46,10 +46,10 @@
 
             <p class="infoText">This generator is made to make it easier for you to create passwords of your preferred length! The standard is at 12 charachters but you can ofcourse change it to something that suits you!</p>
             <div>
-                <input type="text" name="" id="generatedPassword" disabled>
+                <input type="text" id="generatedPassword" disabled>
             </div>
             <div>
-                <input type="range" name="" min="2" max="64" value="12" style="width: 250px;" id="passwordLength" onchange="updatePassword('generatedPassword', 'passwordLength', 'length-text')">
+                <input type="range" min="2" max="64" value="12" style="width: 250px;" id="passwordLength" onchange="updatePassword('generatedPassword', 'passwordLength', 'length-text')">
                 <p id="length-text"></p>
             </div>
             <div>
@@ -67,8 +67,6 @@
         <p id="copyright"></p>
     </footer>
 
-
-</body>
     <script src="assets/scripts/main.js"></script>
     <script>
         /* Gör ett random lösenord automatiskt när sidan laddat in */
@@ -77,4 +75,6 @@
             updatePassword('generatedPassword', 'passwordLength', 'length-text')
         }, false);
     </script>
+</body>
+
 </html>
