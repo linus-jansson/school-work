@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: darkgray;
+}
+
+header {
+    background-color: black;
+    height: 120px;
+    color: white;
+}
+p {
+    padding: 10px
+}
+
+.header-text {
+    padding-top: 45px;
+    padding-left: 45%;
+}
+
+#content {
+    background-color: cornflowerblue;
+    padding-top: 25px;
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 50%;
+    height: 250px;
+}
