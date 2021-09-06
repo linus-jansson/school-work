@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-color: darkgrey;
+    overflow-x: hidden;
+}
+p, a, h1, h2, h3, h4 {
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.info-text {
+    font-size: 15px;
+}
+
+.title {
+    padding-left: 5px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.menu li a:hover {
+    color: darkred;
+    text-decoration: none;
+}
+
+
+@media only screen and (min-width: 1025px) {
+    header 
+    {
+        background-color: beige;
+        margin: 10px;
+        height: 100px;
+
+        box-shadow: 0 -10px 30px 0px rgba(0,0,0,0.3);
+        -webkit-box-shadow: 0 -10px 30px 0px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 -10px 30px 0px rgba(0,0,0,0.3);
+    }
+    
+    footer
+    {
+        background-color: beige;
+        position: fixed;
+        height: 80px;
+        width: 100vw;
+        bottom: 0px;
+        left: 0px;
+        padding-top: 25px;
+    
+        text-align: center;
+    
+        box-shadow: 0 10px 30px 0px rgba(0,0,0,0.3);
+        -webkit-box-shadow: 0 10px 30px 0px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 10px 30px 0px rgba(0,0,0,0.3);
+    }
+    
+    .menu {
+        margin-right: 50px;
+        float: right;
+    }
+    
+    .menu li {
+        display: inline;
+        padding: 10px;   
+    }
+    
+    .menu li a {
+        text-decoration: none;
+        font-size: 20px;
+        font-family: monospace;
+    }
+    
+    
+    .container {
+        background-color: beige;
+        height: 250px;
+        width: 75vw;
+        margin-top: 100px;
+        padding: 20px;
+        margin-left: 12vw;
+        margin-bottom: 100px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+
+}
+
