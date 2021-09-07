@@ -1,0 +1,54 @@
+body {
+    background-color: beige;
+}
+
+.ruta {
+    width: 100px;
+    height: 100px;
+    background-color: purple;
+    /* En animaton som heter move som rör sig linjärt i 5s */
+    animation: flytta 5s cubic-bezier(1,.68,0,1) infinite;
+}
+
+@keyframes flytta {
+    /* from {margin-left: 0;} */
+    /* to {margin-left: 300;} */
+
+    0% {margin-left: 0; margin-top: 0;}
+    25% {margin-left: 300px; margin-top: 0;}
+    50% {margin-left: 300px; margin-top: 300px;}
+    75% {margin-left: 0; margin-top: 300px;}
+    100% {margin-left: 0; margin-top: 0;}
+}
+
+.fotboll {
+
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    display: block;
+
+    animation: bounce 1.75s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+@keyframes bounce {
+    /* from {margin-left: 0;} */
+    /* to {margin-left: 300;} */
+
+    0% {
+        margin-top: 100px;
+    }
+    50% {
+        margin-top: 500px; 
+    }
+    55% {
+        height:80px; 
+        width: 100px
+    }
+    100% {
+        margin-top: 100px; 
+    }
+
+    /* from { transform: translate3d(0, 0, 0);     } */
+    /* to   { transform: translate3d(0, 200px, 10px); height:10px; width: 10px;} */
+}
