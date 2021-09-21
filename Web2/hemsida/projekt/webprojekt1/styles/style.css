@@ -1,0 +1,38 @@
+* {
+  display: border-box;
+  margin: 0;
+}
+header {
+  background-color: red;
+  height: 50px;
+}
+
+.centerComp {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (min-width: 1025px){
+  .menu li {
+    display: inline;
+    padding: 20px;
+
+  }
+
+
+  .parallax {
+    background-image: url("../images/bikes/parallax_bg.png");
+    margin-top: 10px;
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+} 
+
+@media only screen and (max-width: 1024px){
+
+} 

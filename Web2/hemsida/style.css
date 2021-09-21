@@ -37,7 +37,7 @@ header
 
 .container {
     background-color: beige;
-
+    border-radius: 5px;
 }
 
 
