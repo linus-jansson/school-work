@@ -12,6 +12,12 @@ p, a, h1, h2, h3, h4 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+header 
+{
+    background-color: beige;
+    margin: 10px;
+    height: 100px;
+}
 
 .info-text {
     font-size: 15px;
@@ -29,17 +35,119 @@ p, a, h1, h2, h3, h4 {
     text-decoration: none;
 }
 
+.container {
+    background-color: beige;
+    border-radius: 5px;
+}
+
+
+.shadow {
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2); 
+    -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, 0.2); 
+    -moz-box-shadow: 0 0 50px rgba(0, 0, 0, 0.2 ); 
+
+}
+
+.shadow-hover:hover {
+    animation: hover 0.5s ease-in-out;
+}
+
+@keyframes hover {
+    from {}
+
+    to {
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); 
+        -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); 
+        -moz-box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); 
+    }
+}
+
+.dropdown:hover {
+    display: hidden;
+    animation: dropdown 1s ease;
+    height: 100px;
+    width: 50px;
+    background-color: beige;
+
+}
+
+@keyframes dropdown {
+    from {
+        display:hidden;
+    }
+    to {
+        display: block;
+    }
+}
 
 @media only screen and (min-width: 1025px) {
-    header 
+
+
+    .menu {
+        margin-right: 50px;
+        margin-top: 35px;
+        float: right;
+        vertical-align: middle;
+
+    }
+
+    .menu li {
+        display: inline;
+        padding: 10px 40px 10px 40px;   
+        border-style: dotted;
+    }
+
+    .menu li a {
+        text-decoration: none;
+        font-size: 20px;
+        font-family: monospace;
+    }
+
+    .main {
+        display: flex;
+    }
+
+    .container {
+        margin: 50px;
+        padding: 50px;
+    }
+
+    footer
     {
         background-color: beige;
-        margin: 10px;
-        height: 100px;
+        position: fixed;
+        height: 80px;
+        width: 100vw;
+        bottom: 0px;
+        left: 0px;
+        padding-top: 25px;
+    
+        text-align: center;
+    }
 
-        box-shadow: 0 -10px 30px 0px rgba(0,0,0,0.3);
-        -webkit-box-shadow: 0 -10px 30px 0px rgba(0,0,0,0.3);
-        -moz-box-shadow: 0 -10px 30px 0px rgba(0,0,0,0.3);
+}
+
+@media only screen and (max-width: 1024px) {
+
+
+    .menu {
+        margin-right: 50px;
+        margin-top: 35px;
+        float: right;
+        vertical-align: middle;
+
+    }
+
+    .menu li {
+        display: inline;
+        padding: 10px 20px 10px 20px;   
+        border-style: dotted;
+    }
+
+    .menu li a {
+        text-decoration: none;
+        font-size: 20px;
+        font-family: monospace;
     }
     
     footer
@@ -53,31 +161,9 @@ p, a, h1, h2, h3, h4 {
         padding-top: 25px;
     
         text-align: center;
-    
-        box-shadow: 0 10px 30px 0px rgba(0,0,0,0.3);
-        -webkit-box-shadow: 0 10px 30px 0px rgba(0,0,0,0.3);
-        -moz-box-shadow: 0 10px 30px 0px rgba(0,0,0,0.3);
-    }
-    
-    .menu {
-        margin-right: 20px;
-        margin-top:20px;
-        float: right;
-    }
-    
-    .menu li {
-        display: inline;
-        padding: 10px;   
-    }
-    
-    .menu li a {
-        text-decoration: none;
-        font-size: 20px;
-        font-family: monospace;
     }
     
     .container {
-        background-color: beige;
         height: 250px;
         width: 75vw;
         margin-top: 100px;
@@ -85,9 +171,5 @@ p, a, h1, h2, h3, h4 {
         margin-left: 12vw;
         margin-bottom: 100px;
     }
-}
-
-@media only screen and (max-width: 1024px) {
-
 }
 
