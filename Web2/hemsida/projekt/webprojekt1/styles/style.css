@@ -1,7 +1,8 @@
 * {
   display: border-box;
   margin: 0;
-  font-family: arial;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
 }
 header {
   position: fixed;
@@ -18,18 +19,30 @@ header {
   align-items: center;
 }
 
+hgroup {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+hgroup .card-subheading {
+  /* Visually, put on top, without affecting source order */
+  order: -1;
+}
+
 .title {
   color: black; 
   font-size:75px;
+  text-shadow: #319770 1px 0 5px;
 }
 
 .subtitle {
   color: black; 
   font-size:25px;
-}
+  text-shadow: #319770 1px 0 10px;
+} 
 
 .menu li a {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: white;
   font-size: larger;
   text-decoration: none;
@@ -46,10 +59,11 @@ header {
 {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 20%;
+  width: 25%;
   float: left;
-  margin-top: 150px;
-  margin-bottom: 150px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  border-radius: 10px;
 }
 
 .card:hover 
@@ -60,12 +74,12 @@ header {
 .card-image {
   display: block;
   width: 100%;
-  height: 400px;
+  height: 250px;
   object-fit: cover;
 }
 
 .card-content {
-  width: 90%;
+  width: 60%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -95,30 +109,33 @@ footer
   }
 
   .menu li {
-    list-style-type: none;
+    list-style-type: none;  
     padding: 20px;
   }
 
   .content{
-    height: 50px;
+    height: auto;
     background-color: lightgrey;
     width: 50vw;
     padding: 50px;
     margin-top:50px;
+    margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     border-radius: 30px;
   }
 
+
   .parallax {
     margin-top: 10px;
-    min-height: 500px;
+    min-height: 500px;  
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
+
 } 
 
 @media only screen and (max-width: 1024px){
