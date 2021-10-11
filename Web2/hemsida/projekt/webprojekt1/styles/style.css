@@ -101,6 +101,12 @@ footer
   bottom: 0;
 }
 
+#copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 @media only screen and (min-width: 1025px){
   .menu {
