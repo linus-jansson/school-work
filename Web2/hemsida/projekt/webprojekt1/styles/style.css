@@ -138,10 +138,41 @@ footer
     background-repeat: no-repeat;
     background-size: cover;
   }
+  iframe {
+    width: 600px;
+    height: 450px;
+    border: 0; 
+    margin-top: 30px;
+  }
 
 } 
 
 @media only screen and (max-width: 1024px){
+
+  .menu {
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu li {
+    list-style-type: none;  
+    padding: 20px;
+  }
+
+
+  .content{
+    height: auto;
+    background-color: rgb(219, 255, 219);
+    width: 50vw;
+    padding: 50px;
+    margin-top:50px;
+    margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 30px;
+  }
+
   .card 
   {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -166,11 +197,28 @@ footer
   }
   
   .card-content {
-    width: 100%;
+    width: 50%;
     margin: auto;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+  }
+
+  .parallax {
+    margin-top: 10px;
+    min-height: 500px;  
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  iframe {
+    width: 450px;
+    height: 450px;
+    border: 0; 
+    margin-top: 30px;
   }
 } 
