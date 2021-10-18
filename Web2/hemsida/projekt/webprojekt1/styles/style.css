@@ -94,14 +94,11 @@ footer
 {
   background-color: #319770;
   color: white;
-  height: 50px;
+  height: 60px;
   width: 100%;
   position: fixed;
   margin-top: auto;
   bottom: 0;
-}
-
-#copyright {
   display: flex;
   justify-content: center;
   align-items: center;
